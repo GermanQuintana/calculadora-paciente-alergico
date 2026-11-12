@@ -17,18 +17,18 @@
   --bg: #f1f0e8; --surface: #fbfaf5; --surface-2: #e8e6da; --ink: #10292f; --ink-2: #40555a; --ink-3: #5c6d72;
   --line: #d8d5c6; --line-2: #bcb8a6; --accent: #0f4c5c; --on-accent: #f7f6ef; --accent-soft: #dcebe6; --aqua: #1fa58a;
   --warn-bg: #f7ecce; --warn-ink: #5e4200; --warn-line: #d3ad4c; --shadow: 0 1px 0 rgba(16,41,47,.04), 0 12px 32px -18px rgba(16,41,47,.28);
-  --c-apoquel: #537abb; --c-zenrelia: #f08a2c; --c-numelvi: #b592f2; --c-cytopoint: #94771a; --c-ciclosporina: #962c3e; --c-etio: #1fa58a;
+  --c-apoquel: #537abb; --c-zenrelia: #f08a2c; --c-numelvi: #b592f2; --c-cytopoint: #94771a; --c-ciclosporina: #962c3e; --c-etio: #1fa58a; --c-pura: #4635bc;
   --k-retira: #0f7f6c; --k-reduce: #63c4ae; --k-no_responde: #6b6658; --k-abandona: #c2bdab;
   --k-retira-ink: #ffffff; --k-reduce-ink: #0b0b0b; --k-no_responde-ink: #ffffff; --k-abandona-ink: #0b0b0b;
   --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --r: 10px; --nav-h: 60px; --logo-bg: #ffffff;
+  --r: 10px; --nav-h: 60px; --logo-bg: #ffffff; color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0d1618; --surface: #162224; --surface-2: #1e2d30; --ink: #e9eeea; --ink-2: #b7c4c2; --ink-3: #93a3a3;
   --line: #2a3b3e; --line-2: #3d5256; --accent: #63cbb4; --on-accent: #06211d; --accent-soft: #1d3a37; --aqua: #3ba888;
   --warn-bg: #3a2f12; --warn-ink: #f3dc9c; --warn-line: #8a6d1e; --shadow: 0 1px 0 rgba(0,0,0,.2), 0 14px 34px -18px rgba(0,0,0,.7);
-  --c-apoquel: #337ab0; --c-zenrelia: #905211; --c-numelvi: #8031c0; --c-cytopoint: #bb881a; --c-ciclosporina: #b82d67; --c-etio: #3ba888;
+  --c-apoquel: #337ab0; --c-zenrelia: #905211; --c-numelvi: #8031c0; --c-cytopoint: #bb881a; --c-ciclosporina: #b82d67; --c-etio: #3ba888; --c-pura: #937af7;
   --k-retira: #3fbfa2; --k-reduce: #1d6f61; --k-no_responde: #a39e8e; --k-abandona: #4b5552;
   --k-retira-ink: #0b0b0b; --k-reduce-ink: #ffffff; --k-no_responde-ink: #0b0b0b; --k-abandona-ink: #ffffff;
   color-scheme: dark } }
@@ -36,7 +36,7 @@
   --bg: #0d1618; --surface: #162224; --surface-2: #1e2d30; --ink: #e9eeea; --ink-2: #b7c4c2; --ink-3: #93a3a3;
   --line: #2a3b3e; --line-2: #3d5256; --accent: #63cbb4; --on-accent: #06211d; --accent-soft: #1d3a37; --aqua: #3ba888;
   --warn-bg: #3a2f12; --warn-ink: #f3dc9c; --warn-line: #8a6d1e; --shadow: 0 1px 0 rgba(0,0,0,.2), 0 14px 34px -18px rgba(0,0,0,.7);
-  --c-apoquel: #337ab0; --c-zenrelia: #905211; --c-numelvi: #8031c0; --c-cytopoint: #bb881a; --c-ciclosporina: #b82d67; --c-etio: #3ba888;
+  --c-apoquel: #337ab0; --c-zenrelia: #905211; --c-numelvi: #8031c0; --c-cytopoint: #bb881a; --c-ciclosporina: #b82d67; --c-etio: #3ba888; --c-pura: #937af7;
   --k-retira: #3fbfa2; --k-reduce: #1d6f61; --k-no_responde: #a39e8e; --k-abandona: #4b5552;
   --k-retira-ink: #0b0b0b; --k-reduce-ink: #ffffff; --k-no_responde-ink: #0b0b0b; --k-abandona-ink: #ffffff;
   color-scheme: dark }
@@ -71,10 +71,18 @@ button, input, select { font: inherit; color: inherit }
 .nav-links a:hover { background: var(--surface-2); color: var(--ink) }
 .nav-links a.activo { color: var(--ink); background: var(--surface-2) }
 .vista { margin-left: auto }
+.tema { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px 0 10px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--surface); color: var(--ink-2); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background .15s, color .15s }
+.tema:hover { color: var(--ink); background: var(--surface-2) }
+.tema svg { display: block; flex: none }
+.tema .i-luna { display: none }
+.tema[aria-pressed="true"] .i-sol { display: none }
+.tema[aria-pressed="true"] .i-luna { display: block }
+.der { display: flex; align-items: center; gap: 8px; margin-left: auto }
+.der .vista { margin-left: 0 }
 /* Con el logotipo y la firma, los enlaces de sección van siempre en una segunda fila. */
 :root { --nav-h: 100px } body.vista-tutor { --nav-h: 60px }
 @media (min-width: 760px) { .firma-txt { display: block } .firma-linea { display: none } }
-@media (max-width: 479px) { .marca { font-size: 17px } .logo-pastilla img { height: 34px } .nav-in { gap: 8px 10px } .vista .v-pre { display: none } .vista button { padding-inline: 11px } .vista button::first-letter { text-transform: uppercase } }
+@media (max-width: 479px) { .tema .t-txt { display: none } .tema { padding: 0 9px } .marca { font-size: 17px } .logo-pastilla img { height: 34px } .nav-in { gap: 8px 10px } .vista .v-pre { display: none } .vista button { padding-inline: 11px } .vista button::first-letter { text-transform: uppercase } }
 
 .seg { display: inline-flex; padding: 3px; gap: 2px; background: var(--surface-2); border-radius: 999px; max-width: 100% }
 .seg button { border: 0; background: transparent; padding: 6px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 500; color: var(--ink-2); cursor: pointer; white-space: nowrap; transition: background .18s, color .18s }
@@ -204,8 +212,18 @@ input[type=range] { accent-color: var(--accent) }
 /* ---------- resultados ---------- */
 .res-cab { display: flex; justify-content: space-between; gap: 10px 20px; align-items: baseline; flex-wrap: wrap }
 .duelo { display: grid; gap: 0; margin-top: 18px; border-top: 2px solid var(--ink) }
-@media (min-width: 640px) { .duelo { grid-template-columns: 1fr 1fr } .via + .via { border-left: 1px solid var(--line); padding-left: 28px } }
-@media (max-width: 639px) { .via + .via { border-top: 1px solid var(--line) } }
+@media (min-width: 640px) { .duelo.n2 { grid-template-columns: 1fr 1fr } .duelo.n2 .via + .via { border-left: 1px solid var(--line); padding-left: 28px } }
+@media (max-width: 639px) { .duelo.n2 .via + .via { border-top: 1px solid var(--line) } }
+@media (min-width: 900px) { .duelo.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)) } .duelo.n3 .via + .via { border-left: 1px solid var(--line); padding-left: 22px } }
+@media (max-width: 899px) { .duelo.n3 .via + .via { border-top: 1px solid var(--line) } }
+.duelo.n3 .via-cifra { font-size: clamp(40px, 4.6vw, 58px) }
+.via-expl { margin-top: 10px; font-size: 13.5px; color: var(--ink); line-height: 1.45; max-width: 46ch }
+.via-nombre .chip { margin-left: 2px }
+.comparar { margin-top: 16px }
+.comparar .seg { flex-wrap: wrap; border-radius: 14px }
+.g-cruces { margin-top: 6px; display: grid; gap: 4px }
+.cartera-res.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+@media (max-width: 639px) { .cartera-res.n3 { grid-template-columns: 1fr 1fr } }
 .via { padding: 18px 20px 20px 0; min-width: 0 }
 .via-nombre { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14.5px }
 .via-cifra { font: 500 clamp(44px, 7.4vw, 76px)/1 var(--serif); letter-spacing: -.03em; margin-top: 10px }
@@ -234,6 +252,7 @@ input[type=range] { accent-color: var(--accent) }
 .g-tip em { font-style: normal; margin-left: auto; padding-left: 14px; font-variant-numeric: tabular-nums; font-weight: 600 }
 .g-tip .sw { width: 8px; height: 8px; border-radius: 50%; box-shadow: 0 0 0 1px color-mix(in srgb, var(--bg) 45%, transparent) }
 .sin-cruce { margin-top: 6px; font-size: 13.5px; color: var(--ink-2) }
+.sin-cruce b { color: var(--ink); font-weight: 600 }
 
 .cohorte-barra { display: flex; gap: 2px; height: 28px; margin-top: 16px }
 .cohorte-barra div { border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 13px; font-weight: 600; min-width: 3px; overflow: visible; white-space: nowrap; transition: flex-basis .35s cubic-bezier(.2,.7,.2,1) }
@@ -342,12 +361,16 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
 .t-duelo { display: grid; margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px }
 .t-via { padding: 12px 22px 14px; min-width: 0 }
 .t-via + .t-via { border-top: 1px solid var(--line) }
-@media (min-width: 620px) { .t-duelo { grid-template-columns: 1fr 1fr } .t-via + .t-via { border-top: 0; border-left: 1px solid var(--line) } }
+@media (min-width: 720px) { .t-duelo { grid-template-columns: repeat(3, minmax(0, 1fr)) } .t-via + .t-via { border-top: 0; border-left: 1px solid var(--line) } .t-via-rot { min-height: 2.7em } }
+.t-via-nota { margin-top: 6px; font-size: 14px; line-height: 1.35; color: var(--ink-2) }
+.t-via-nota.hab { color: var(--ink) }
+.t-via-nota b { font-weight: 600 }
+.t-via .sw { width: 10px; height: 10px; margin-right: 7px; vertical-align: 0 }
 .t-via-rot { font-weight: 600; font-size: 16px }
 .t-via-rot span { font-weight: 400; color: var(--ink-3) }
-.t-via-cifra { font: 500 clamp(40px, 5vw, 50px)/1 var(--serif); letter-spacing: -.03em; margin-top: 4px; white-space: nowrap }
+.t-via-cifra { font: 500 clamp(36px, 4.2vw, 46px)/1 var(--serif); letter-spacing: -.03em; margin-top: 4px; white-space: nowrap }
 .t-via-pie { margin-top: 4px; font-size: 15px; color: var(--ink-2) }
-.t-veredicto { margin-top: 14px; font: 400 clamp(21px, 2.4vw, 25px)/1.26 var(--serif); letter-spacing: -.01em; max-width: 36ch; text-wrap: balance }
+.t-veredicto { margin-top: 14px; font: 400 clamp(21px, 2.4vw, 25px)/1.26 var(--serif); letter-spacing: -.01em; max-width: 52ch; text-wrap: balance }
 .t-nota { margin-top: 6px; font-size: 14px; color: var(--ink-3); max-width: 76ch }
 .t-barra { display: flex; gap: 2px; height: 10px; margin-top: 14px }
 .t-barra i { border-radius: 3px; min-width: 3px }
@@ -367,10 +390,12 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
   :root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
     --bg: #ffffff; --surface: #ffffff; --surface-2: #eeeeea; --ink: #10292f; --ink-2: #40555a; --ink-3: #5c6d72; --line: #d8d5c6; --line-2: #bcb8a6;
     --accent: #0f4c5c; --on-accent: #ffffff; --accent-soft: #dcebe6; --warn-bg: #f7ecce; --warn-ink: #5e4200; --warn-line: #d3ad4c; --shadow: none;
-    --c-apoquel: #537abb; --c-zenrelia: #f08a2c; --c-numelvi: #b592f2; --c-cytopoint: #94771a; --c-ciclosporina: #962c3e; --c-etio: #1fa58a; color-scheme: light }
+    --c-apoquel: #537abb; --c-zenrelia: #f08a2c; --c-numelvi: #b592f2; --c-cytopoint: #94771a; --c-ciclosporina: #962c3e; --c-etio: #1fa58a; --c-pura: #4635bc; --aqua: #1fa58a; --logo-bg: #ffffff;
+    --k-retira: #0f7f6c; --k-reduce: #63c4ae; --k-no_responde: #6b6658; --k-abandona: #c2bdab;
+    --k-retira-ink: #ffffff; --k-reduce-ink: #0b0b0b; --k-no_responde-ink: #ffffff; --k-abandona-ink: #0b0b0b; color-scheme: light }
   @page { size: A4; margin: 13mm 14mm }
   body { font-size: 11pt }
-  .nav, .cab, .rejilla, .pie, .firma-linea, #tip, .inf-acc, #informe > header, body::before { display: none !important }
+  .comparar, .nav, .cab, .rejilla, .pie, .firma-linea, #tip, .inf-acc, #informe > header, body::before { display: none !important }
   .membrete { display: flex; align-items: center; gap: 12px; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--line-2); font-size: 8.5pt; line-height: 1.4; color: var(--ink-2) }
   .membrete img { display: block; height: 13mm; width: auto }
   .membrete .m-fecha { margin-left: auto; white-space: nowrap }
@@ -386,8 +411,9 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
   .t-opciones > li { padding-block: 5px; break-inside: avoid }
   .t-nombre { font-size: 13pt } .t-como { font-size: 10pt; margin-top: 1px }
   .t-mes { font-size: 20pt } .t-mes small { font-size: 9pt } .t-anio { font-size: 8.5pt; margin-top: 2px }
-  .t-duelo { margin-top: 12px; grid-template-columns: 1fr 1fr; break-inside: avoid }
+  .t-duelo { margin-top: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); break-inside: avoid }
   .t-via { padding: 10px 14px 12px } .t-via + .t-via { border-top: 0; border-left: 1px solid var(--line) }
+  .t-via-nota { font-size: 8.5pt; margin-top: 4px }
   .t-via-rot { font-size: 10.5pt } .t-via-cifra { font-size: 28pt; margin-top: 5px } .t-via-pie { font-size: 9pt; margin-top: 4px }
   .t-veredicto { font-size: 14pt; margin-top: 12px; max-width: none }
   .t-nota { font-size: 8.5pt; margin-top: 5px; max-width: none }
@@ -403,6 +429,10 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact }
 }
 </style>
+<script>
+/* Tema elegido por el usuario (modo día / noche): se aplica antes de pintar para evitar un destello. */
+(function () { try { var t = window.localStorage.getItem('calculadora-paciente-alergico.tema'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) { /* sin almacenamiento */ } })();
+</script>
 
 <nav class="nav" aria-label="Secciones">
   <div class="wrap nav-in">
@@ -419,9 +449,16 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
       <a href="#metodo">Método y limitaciones</a>
       <a href="#informe">Informe</a>
     </div>
-    <div class="seg vista" role="group" aria-label="Vista">
-      <button type="button" id="vista-clinica" data-vista="clinica" aria-pressed="true"><span class="v-pre">Vista </span>clínica</button>
-      <button type="button" id="vista-tutor" data-vista="tutor" aria-pressed="false"><span class="v-pre">Vista </span>tutor</button>
+    <div class="der">
+      <div class="seg vista" role="group" aria-label="Vista">
+        <button type="button" id="vista-clinica" data-vista="clinica" aria-pressed="true"><span class="v-pre">Vista </span>clínica</button>
+        <button type="button" id="vista-tutor" data-vista="tutor" aria-pressed="false"><span class="v-pre">Vista </span>tutor</button>
+      </div>
+      <button type="button" class="tema" id="tema" aria-pressed="false" aria-label="Modo noche" title="Cambiar a modo noche">
+        <svg class="i-sol" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v1.8M8 13.2V15M1 8h1.8M13.2 8H15M3.05 3.05l1.27 1.27M11.68 11.68l1.27 1.27M3.05 12.95l1.27-1.27M11.68 4.32l1.27-1.27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg class="i-luna" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.6 10.2A6 6 0 0 1 5.8 2.4a6 6 0 1 0 7.8 7.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span class="t-txt" id="tema-txt">Modo día</span>
+      </button>
     </div>
   </div>
 </nav>
@@ -429,7 +466,7 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
 
 <header class="wrap cab">
   <h1>Calculadora de rentabilidad del paciente alérgico</h1>
-  <p>Perro con dermatitis atópica. Compara tratar solo los síntomas con la vía etiológica (test de alérgenos, inmunoterapia y el sintomático que siga haciendo falta), con tus propios precios y con los supuestos clínicos a la vista.</p>
+  <p>Perro con dermatitis atópica. Compara tres escenarios: solo sintomático; solo etiológica (test de alérgenos e inmunoterapia sin medicación, un escenario teórico); e híbrida (test, inmunoterapia y el sintomático que siga haciendo falta). Con tus propios precios y con los supuestos clínicos a la vista.</p>
 </header>
 
 <div class="wrap rejilla">
@@ -516,7 +553,7 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
     <section class="sec" id="etiologica" aria-labelledby="h-etio">
       <header>
         <h2 id="h-etio">Vía etiológica</h2>
-        <p>Test para elegir alérgenos, inmunoterapia y el sintomático de base, que se mantiene completo hasta que la vacuna hace efecto.</p>
+        <p>Test para elegir alérgenos, inmunoterapia y revisiones. El sintomático de base solo interviene en la vía sintomática y en la híbrida, donde se mantiene completo hasta que la vacuna hace efecto y después según la respuesta de cada perro; en la etiológica pura (teórica) no interviene.</p>
       </header>
       <div class="dos">
         <div class="panel pad plan">
@@ -549,6 +586,12 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
       <header>
         <h2 id="h-res">Resultados</h2>
         <p id="res-entrada"></p>
+        <div class="campo comparar"><span class="rot" id="rot-cmp">Comparar</span>
+          <div class="seg suave" id="comparar" role="group" aria-labelledby="rot-cmp">
+            <button type="button" id="cmp-tres" data-cmp="tres" aria-pressed="true">Las tres</button>
+            <button type="button" id="cmp-pura" data-cmp="pura" aria-pressed="false">Sintomático frente a etiológica pura</button>
+            <button type="button" id="cmp-hibrida" data-cmp="hibrida" aria-pressed="false">Sintomático frente a híbrida</button>
+          </div></div>
       </header>
       <div id="res-nodisp" class="aviso-caja" hidden></div>
       <div id="res-cuerpo">
@@ -561,12 +604,12 @@ body.vista-tutor .pie { margin-top: 16px; padding-block: 14px 20px }
           <h3 id="g-titulo"></h3>
           <div class="leyenda" id="g-leyenda"></div>
           <div class="grafico" id="grafico"></div>
-          <p class="sin-cruce" id="g-cruce"></p>
+          <div class="sin-cruce g-cruces" id="g-cruce"></div>
         </div>
 
-        <div class="bloque">
-          <h3>Qué les pasa a 100 perros que empiezan la vacuna</h3>
-          <p class="entrada">Reparto a los 12 meses según los supuestos clínicos. Son medias de cohorte: no predicen la respuesta de un paciente concreto.</p>
+        <div class="bloque" id="bloque-cohorte">
+          <h3>Vía híbrida: qué les pasa a 100 perros que empiezan la vacuna</h3>
+          <p class="entrada">Reparto a los 12 meses según los supuestos clínicos; es lo que hace que la híbrida mantenga, reduzca o retire el sintomático. Son medias de cohorte: no predicen la respuesta de un paciente concreto. La etiológica pura no usa este reparto: supone que todos controlan la enfermedad sin medicación.</p>
           <div class="cohorte-barra" id="cohorte-barra" role="img"></div>
           <dl class="ramas" id="ramas"></dl>
         </div>
@@ -2856,6 +2899,27 @@ const CALC_MOTOR = (function () {
     const viaA = construirVia(A);
     const viaB = construirVia(B);
 
+    // --- vía etiológica PURA (escenario teórico): test + viales + revisiones de la vía etiológica, sin ningún
+    // sintomático para nadie. Todos completan la pauta: no hay cohorte de respuesta ni abandono en el primer año.
+    // El abandono anual posterior se aplica igual que en la híbrida (persistencia desde el mes 12): solo quien sigue
+    // vacunándose recompra viales y hace las revisiones de la vacuna; quien la deja pasa al calendario de revisiones
+    // de la vía sintomática, sin medicación.
+    const Pu = { test: nuevaSerie(), inmunoterapia: nuevaSerie(), sintomatico: nuevaSerie(), revisiones: nuevaSerie() };
+    const puraEnVac = ceros(N), puraViales = ceros(N);
+    for (let m = 0; m < N; m++) {
+      const y = Math.floor(m / M);
+      const Sp = persistencia(m);
+      const nVial = m === 0 ? 1 : (mesesVial.has(m) ? Sp : 0);
+      const nRev = Sp * revEtio(y) + (1 - Sp) * revSint(y);
+      for (const c of CAMPOS) {
+        if (m === 0) Pu.test[c][m] = ecoTest[c];
+        Pu.inmunoterapia[c][m] = ecoVial[c] * nVial;
+        Pu.revisiones[c][m] = ecoRev[c] * nRev;
+      }
+      puraEnVac[m] = Sp; puraViales[m] = nVial;
+    }
+    const viaP = construirVia(Pu);
+
     const salidaRamas = {};
     for (const r of RAMAS) {
       const x = ramas[r];
@@ -2882,6 +2946,54 @@ const CALC_MOTOR = (function () {
     const S_fin = persistencia(N - 1);
     const por100 = (x) => redondear(100 * x, 8);
 
+    // Diferencia acumulada y cruce definitivo de un par de vías (Y − X), con la misma definición que `cruce`.
+    // nombreY se usa en el campo `sentido` (p. ej. 'etiologica_pura_pasa_a_ser_mas_barata').
+    function compararPar(X, Y, nombreY) {
+      const t = mesDeCruce(X.mensual.coste_tutor_acum, Y.mensual.coste_tutor_acum);
+      const c = mesDeCruce(X.mensual.margen_acum, Y.mensual.margen_acum);
+      return {
+        diferencia: {
+          coste_tutor_acum: Y.mensual.coste_tutor_acum.map((v, i) => v - X.mensual.coste_tutor_acum[i]),
+          margen_acum: Y.mensual.margen_acum.map((v, i) => v - X.mensual.margen_acum[i]),
+          coste_tutor_final: Y.total.coste_tutor - X.total.coste_tutor,
+          margen_final: Y.total.margen - X.total.margen,
+        },
+        cruce: {
+          tutor: t && Object.assign(t, { sentido: nombreY + (t.signo_inicial > 0 ? '_pasa_a_ser_mas_barata' : '_pasa_a_ser_mas_cara') }),
+          clinica: c && Object.assign(c, { sentido: nombreY + (c.signo_inicial > 0 ? '_pasa_a_ser_menos_rentable' : '_pasa_a_ser_mas_rentable') }),
+          cambios_signo: {
+            tutor: cambiosDeSigno(X.mensual.coste_tutor_acum, Y.mensual.coste_tutor_acum),
+            clinica: cambiosDeSigno(X.mensual.margen_acum, Y.mensual.margen_acum),
+          },
+        },
+      };
+    }
+    const parPura = compararPar(viaA, viaP, 'etiologica_pura');
+    const parHibrida = compararPar(viaA, viaB, 'etiologica');
+    const parPuraHibrida = compararPar(viaB, viaP, 'etiologica_pura');
+
+    const infoTest = test ? { id: test.id, nombre: test.nombre, alimentario: !!test.alimentario } : null;
+    const infoVac = () => ({ id: vac.id, nombre: vac.nombre, via: vac.via, meses_compra_vial: Array.from(mesesVial).sort((x, y) => x - y) });
+    const etiologicaHibrida = Object.assign({
+      escenario: 'hibrida',
+      test: infoTest,
+      inmunoterapia: infoVac(),
+      viales_esperados_por_paciente: cohorte.viales_esperados.reduce((s, v) => s + v, 0),
+      ramas: salidaRamas,
+      // Solo con ciclosporina de base: frascos por año de un paciente que retira o reduce el sintomático
+      ciclosporina_por_rama: fS.tipo === 'liquido' ? { retira: ciclo.retira.map((x) => x.detalle), reduce: ciclo.reduce.map((x) => x.detalle) } : null,
+    }, viaB);
+    const etiologicaPura = Object.assign({
+      escenario: 'pura',
+      teorico: true,
+      test: infoTest,
+      inmunoterapia: infoVac(),
+      viales_esperados_por_paciente: puraViales.reduce((s, v) => s + v, 0),
+      // Fracción que sigue vacunándose cada mes (1 hasta el mes 11; después, persistencia por el abandono anual posterior)
+      en_vacunacion_mensual: puraEnVac,
+      viales_esperados_mensual: puraViales,
+    }, viaP);
+
     return {
       disponible: true,
       entrada: {
@@ -2899,14 +3011,18 @@ const CALC_MOTOR = (function () {
       meses: Array.from({ length: N }, (_, i) => i),
       dosis: sint.dosis,
       sintomatica: Object.assign({ farmaco: farmacoId, nombre: sint.nombre, detalle_farmaco_por_anio: sint.anios }, viaA),
-      etiologica: Object.assign({
-        test: test ? { id: test.id, nombre: test.nombre, alimentario: !!test.alimentario } : null,
-        inmunoterapia: { id: vac.id, nombre: vac.nombre, via: vac.via, meses_compra_vial: Array.from(mesesVial).sort((x, y) => x - y) },
-        viales_esperados_por_paciente: cohorte.viales_esperados.reduce((s, v) => s + v, 0),
-        ramas: salidaRamas,
-        // Solo con ciclosporina de base: frascos por año de un paciente que retira o reduce el sintomático
-        ciclosporina_por_rama: fS.tipo === 'liquido' ? { retira: ciclo.retira.map((x) => x.detalle), reduce: ciclo.reduce.map((x) => x.detalle) } : null,
-      }, viaB),
+      // Tres escenarios con la misma forma de series. `etiologica` es un alias de `etiologica_hibrida` (mismo objeto),
+      // conservado para no romper llamadas anteriores.
+      etiologica_pura: etiologicaPura,
+      etiologica_hibrida: etiologicaHibrida,
+      etiologica: etiologicaHibrida,
+      // Diferencias y cruces por par. Signo: segunda vía − primera (p. ej. pura − sintomática).
+      comparaciones: {
+        pura_vs_sintomatica: parPura,
+        hibrida_vs_sintomatica: parHibrida,
+        pura_vs_hibrida: parPuraHibrida,
+      },
+      // `diferencia` y `cruce` (sin prefijo) se refieren a la híbrida frente a la sintomática, como antes.
       diferencia: {
         // etiológica - sintomática (acumulado). Tutor: >0 = la etiológica le cuesta más. Clínica: >0 = la etiológica deja más margen.
         coste_tutor_acum: viaB.mensual.coste_tutor_acum.map((v, i) => v - viaA.mensual.coste_tutor_acum[i]),
@@ -2947,9 +3063,14 @@ const CALC_MOTOR = (function () {
   }
 
   // ------------------------------------------------------------------ cartera de pacientes
+  // escenario_etiologica: 'hibrida' (por defecto) o 'pura'. Decide qué vía etiológica se usa en `etiologica`,
+  // `diferencia_margen_medio_anual` y `mixta`. Las tres vías se devuelven siempre (sintomatica, etiologica_pura,
+  // etiologica_hibrida). Se llama así porque `escenario` ya nombra los parámetros de compararVias.
   function calcularCartera(datos, entrada) {
     const en = entrada || {};
     const esc = en.escenario || {};
+    const elegido = en.escenario_etiologica == null ? 'hibrida' : en.escenario_etiologica;
+    if (elegido !== 'pura' && elegido !== 'hibrida') throw new Error("escenario_etiologica debe ser 'pura' o 'hibrida'");
     let grupos;
     if (Array.isArray(en.reparto_pesos) && en.reparto_pesos.length) {
       const conN = en.reparto_pesos.every((g) => esNumero(g.n));
@@ -2970,51 +3091,65 @@ const CALC_MOTOR = (function () {
     if (grupos.length === 1) avisos.push(aviso('PESO_MEDIO', 'Extrapolación con un único peso medio: la dosis va por bandas, así que es una aproximación; un reparto por pesos es más fiel.'));
     const H = horizonte(datos, esc.horizonte_anios, avisos);
     const vacio = () => Array.from({ length: H }, (_, y) => ({ anio: y + 1, coste_tutor: 0, ingreso_neto: 0, coste_compra: 0 }));
-    const acA = vacio(), acB = vacio();
+    const VIAS = { sintomatica: 'sintomatica', etiologica_pura: 'etiologica_pura', etiologica_hibrida: 'etiologica_hibrida' };
+    const ac = {}; Object.keys(VIAS).forEach((v) => { ac[v] = vacio(); });
     const detalle = [], excluidos = [];
     let nIncluidos = 0;
     for (const g of grupos) {
       const r = compararVias(datos, Object.assign({}, esc, { peso_kg: g.peso_kg, horizonte_anios: H }));
       if (!r.disponible) { excluidos.push({ peso_kg: g.peso_kg, n: g.n, motivo: r.motivo }); continue; }
       nIncluidos += g.n;
-      for (let y = 0; y < H; y++) {
-        for (const c of ['coste_tutor', 'ingreso_neto', 'coste_compra']) {
-          acA[y][c] += r.sintomatica.anual[y][c] * g.n;
-          acB[y][c] += r.etiologica.anual[y][c] * g.n;
+      for (const v of Object.keys(VIAS)) {
+        for (let y = 0; y < H; y++) {
+          for (const c of ['coste_tutor', 'ingreso_neto', 'coste_compra']) ac[v][y][c] += r[v].anual[y][c] * g.n;
         }
       }
+      const mm = (v) => r[v].total.margen / H;
       detalle.push({
         peso_kg: r.entrada.peso_kg, n: g.n, farmaco: r.entrada.farmaco,
-        margen_medio_anual_por_paciente: { sintomatica: r.sintomatica.total.margen / H, etiologica: r.etiologica.total.margen / H },
+        margen_medio_anual_por_paciente: {
+          sintomatica: mm('sintomatica'),
+          etiologica: mm(elegido === 'pura' ? 'etiologica_pura' : 'etiologica_hibrida'),
+          etiologica_pura: mm('etiologica_pura'),
+          etiologica_hibrida: mm('etiologica_hibrida'),
+        },
       });
     }
-    const via = (ac) => {
-      const anual = ac.map((x) => Object.assign({ anio: x.anio }, cerrar(x)));
+    const via = (acv) => {
+      const anual = acv.map((x) => Object.assign({ anio: x.anio }, cerrar(x)));
       const total = sumar(anual);
       return { anual, total, margen_medio_anual: total.margen / H, coste_tutor_medio_anual: total.coste_tutor / H, ingreso_neto_medio_anual: total.ingreso_neto / H };
     };
-    const sintomatica = via(acA), etiologica = via(acB);
+    const sintomatica = via(ac.sintomatica), pura = via(ac.etiologica_pura), hibrida = via(ac.etiologica_hibrida);
+    const etiologica = elegido === 'pura' ? pura : hibrida;
+    const acE = elegido === 'pura' ? ac.etiologica_pura : ac.etiologica_hibrida;
     const salida = {
       n_pacientes: grupos.reduce((s, g) => s + g.n, 0), n_incluidos: nIncluidos, horizonte_anios: H,
+      escenario_etiologica: elegido,
       grupos: detalle, excluidos, avisos,
-      sintomatica, etiologica,
+      sintomatica, etiologica, etiologica_pura: pura, etiologica_hibrida: hibrida,
       diferencia_margen_medio_anual: etiologica.margen_medio_anual - sintomatica.margen_medio_anual,
+      diferencias_margen_medio_anual: {
+        pura_vs_sintomatica: pura.margen_medio_anual - sintomatica.margen_medio_anual,
+        hibrida_vs_sintomatica: hibrida.margen_medio_anual - sintomatica.margen_medio_anual,
+        pura_vs_hibrida: pura.margen_medio_anual - hibrida.margen_medio_anual,
+      },
     };
     if (esNumero(en.fraccion_etiologica)) {
       const k = limitar(en.fraccion_etiologica, 0, 1);
-      const mezcla = acA.map((x, y) => ({
+      const mezcla = ac.sintomatica.map((x, y) => ({
         anio: x.anio,
-        coste_tutor: x.coste_tutor * (1 - k) + acB[y].coste_tutor * k,
-        ingreso_neto: x.ingreso_neto * (1 - k) + acB[y].ingreso_neto * k,
-        coste_compra: x.coste_compra * (1 - k) + acB[y].coste_compra * k,
+        coste_tutor: x.coste_tutor * (1 - k) + acE[y].coste_tutor * k,
+        ingreso_neto: x.ingreso_neto * (1 - k) + acE[y].ingreso_neto * k,
+        coste_compra: x.coste_compra * (1 - k) + acE[y].coste_compra * k,
       }));
-      salida.mixta = Object.assign({ fraccion_etiologica: k }, via(mezcla));
+      salida.mixta = Object.assign({ fraccion_etiologica: k, escenario_etiologica: elegido }, via(mezcla));
     }
     return salida;
   }
 
   return {
-    version: '1.1.0',
+    version: '1.2.0',
     RAMAS,
     redondear, redondearPeso, lineaEconomica, combinacionFrascos, frascosConValidez, mesDeCruce,
     dosisPorPeso, calcularSintomatico, rankingSintomaticos,
@@ -3066,7 +3201,7 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       test: D0.defectos.test, vacuna: D0.defectos.inmunoterapia, base: 'mas_barato',
       asit: asitDefecto('subcutanea'), pleno: 'rampa',
       rev: { sint: D0.revisiones.sintomatica_por_anio, et1: D0.revisiones.etiologica_primer_anio, etn: D0.revisiones.etiologica_siguientes },
-      cartera: { n: 120, peso: 20 }
+      cartera: { n: 120, peso: 20 }, comparar: 'tres'
     };
   }
   var datos = clonar(D0), S = estadoDefecto();
@@ -3093,6 +3228,7 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       if (D0.inmunoterapias.some(function (t) { return t.id === e.vacuna; })) S.vacuna = e.vacuna;
       if (e.base === 'mas_barato' || D0.farmacos[e.base]) S.base = e.base;
       S.pleno = e.pleno === 'escalon' ? 'escalon' : 'rampa';
+      S.comparar = ['tres', 'pura', 'hibrida'].indexOf(e.comparar) >= 0 ? e.comparar : 'tres';
       var via = viaDe(S.vacuna), pt = via === 'sublingual' ? P.tasa_respuesta_sublingual : P.tasa_respuesta_subcutanea, ea = e.asit || {};
       S.asit = asitDefecto(via);
       S.asit.tasa_respuesta = n(ea.tasa_respuesta, pt.min, pt.max, pt.valor);
@@ -3290,16 +3426,19 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
         'Apoquel: cada inducción son 14 días a dos tomas. Cytopoint: 365 / (7 × semanas) inyecciones al año, un valor medio con decimales; cada 4 semanas es la pauta de la clínica, la ficha indica una vez al mes. Ciclosporina: 0,05 ml/kg por toma, fase diaria de 4 semanas y después la frecuencia elegida.',
         'Ciclosporina, frascos: un frasco abierto no se usa más allá de su validez tras abrir (Cyclavance 6 meses, Modulis 3 meses, fichas CIMAVet 3011 ESP y 3178 ESP; editable en Configuración); lo que no se ha consumido al caducar se desecha y se abre otro. Para cada año se simula el consumo medio diario con un frasco abierto cada vez y se elige la secuencia de frascos enteros de menor PVP que cumple esa restricción. Es una aproximación: el consumo se reparte de forma continua (en días alternos, media toma al día) y el sobrante no pasa al año siguiente, aunque el frasco siga en validez. Lo mismo se aplica a quien reduce o retira la ciclosporina en la vía etiológica.',
         'Los meses con síntomas escalan los días de tratamiento y se reparten por igual a lo largo del año.',
-        'La vía etiológica es un modelo de cohorte en valor esperado. En el mes 0 todos pagan el test y el primer vial; los viales siguientes los compra solo quien sigue vacunándose.',
+        'Se comparan tres escenarios. Solo sintomático: el fármaco de base mientras haga falta y sus revisiones, sin vacuna. Solo etiológica (teórico): test, viales y revisiones de la vacuna, sin ninguna medicación para nadie. Híbrida: test y vacuna más el sintomático que cada perro siga necesitando según su respuesta. El sintomático de base solo interviene en la sintomática y en la híbrida.',
+        'La etiológica pura es un escenario teórico, una cota: supone que la vacuna controla la enfermedad por sí sola. Todos completan la pauta, sin cohorte de respuesta ni abandono el primer año; el abandono anual posterior se aplica igual que en la híbrida, desde el mes 12, a la compra de viales y a las revisiones de la vacuna (quien la deja pasa a las revisiones de la vía sintomática, sin medicación). La bibliografía indica que el control sin medicación ocurre en una minoría, así que no está respaldada como resultado típico.',
+        'La híbrida es un modelo de cohorte en valor esperado. En el mes 0 todos pagan el test y el primer vial; los viales siguientes los compra solo quien sigue vacunándose.',
+        'La pura no siempre cuesta menos que la híbrida: en la híbrida, quien abandona pronto y los no respondedores dejan de comprar viales, mientras que en la pura todos los compran. Con un sintomático muy barato (perros muy pequeños) la pura puede costar más.',
         'Quien abandona antes del año paga test y primer vial y sigue con el sintomático completo. El modelo supone que ese abandono ocurre al inicio: no compra el segundo vial ni hace las revisiones de la vacuna, lo que infravalora algo el coste de esa rama. Los no respondedores se vacunan hasta el mes indicado y después vuelven al calendario de revisiones de la vía sintomática.',
         'El sintomático se mantiene completo durante los meses sin ahorro. Por defecto el ahorro crece de forma lineal hasta el mes 12; el escalón es una opción.',
-        'Cruce de las curvas: se informa el cruce definitivo, el primer mes desde el que la diferencia acumulada ya no cambia de signo hasta el final del horizonte. Las compras de vial pueden hacer que las curvas se crucen varias veces; si es así, se dice.',
+        'Cruce de las curvas: para cada escenario etiológico frente a solo sintomático se informa el cruce definitivo, el primer mes desde el que la diferencia acumulada ya no cambia de signo hasta el final del horizonte. Las compras de vial pueden hacer que las curvas se crucen varias veces; si es así, se dice.',
         'Desde el mes 12 se aplica un abandono anual entre los respondedores. Los que persisten se vacunan durante todo el horizonte: no se modela suspender la vacuna a los 3 o 5 años.',
         'Todas las vacunas usan los mismos supuestos de eficacia. Solo la vía sublingual cambia la tasa de respuesta por defecto. No hay ventaja por producto.',
         'La extrapolación a cartera multiplica el resultado por paciente por el número de pacientes. Con un único peso medio es una aproximación, porque la dosis va por tramos de peso.'
       ].map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
       '<h3>Limitaciones que conviene decir en voz alta</h3><ul>' + [
-        'La inmunoterapia no sustituye al sintomático durante los primeros 6 a 12 meses: en ese periodo los costes se suman.',
+        'La inmunoterapia no sustituye al sintomático durante los primeros 6 a 12 meses: en ese periodo los costes se suman. Por eso el escenario realista es la híbrida; la etiológica pura sirve de referencia teórica y no debe presentarse como el resultado esperable.',
         'Cerca de la mitad de los perros que completan un año no responde lo suficiente, y solo uno de cada cinco llega a prescindir de la medicación sistémica.',
         'Uno de cada cuatro tutores abandona antes del año y pierde lo invertido.',
         'Los test de IgE no diagnostican dermatitis atópica: sirven para elegir alérgenos cuando ya se ha decidido hacer inmunoterapia.',
@@ -3337,7 +3476,7 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
     var tut = S.vista === 'tutor';
     document.body.classList.toggle('vista-tutor', tut);
     $('h-paciente').textContent = tut ? 'Su perro' : 'Paciente'; $('rot-hor').textContent = tut ? 'Años que se comparan' : 'Horizonte';
-    pulsa(document.querySelector('.vista'), 'data-vista', S.vista); pulsa($('anio-rk'), 'data-anio', S.anioRk); pulsa($('pleno'), 'data-pleno', S.pleno);
+    pulsa(document.querySelector('.vista'), 'data-vista', S.vista); pulsa($('anio-rk'), 'data-anio', S.anioRk); pulsa($('pleno'), 'data-pleno', S.pleno); pulsa($('comparar'), 'data-cmp', S.comparar);
     $('cyto-int').value = String(S.cyto); $('ciclo-marca').value = S.cicloMarca; $('ciclo-frec').value = S.cicloFrec;
     $('test').value = S.test || ''; $('base').value = S.base;
     var rv = document.querySelector('input[name=vacuna][value="' + S.vacuna + '"]'); if (rv) rv.checked = true;
@@ -3393,22 +3532,45 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
     }).join('') + rk.no_disponibles.map(function (r) { return '<div class="rk-fila" role="listitem"><span style="color:var(--ink-3)">' + esc(r.nombre) + '</span><span class="menor">' + esc(r.etiqueta || 'no calculado') + '</span><span></span></div>'; }).join('');
   }
 
+  // ---------- tres escenarios ----------
+  // sint = solo sintomático; pura = solo etiológica (teórico, sin medicación); hib = híbrida (vacuna + sintomático según respuesta).
+  var VIA = {
+    sint: { clave: 'sintomatica', nombre: 'Solo sintomático', corto: 'Solo sintomático', sujeto: 'Solo sintomático', dash: '' },
+    pura: { clave: 'etiologica_pura', nombre: 'Solo etiológica (teórico)', corto: 'Etiológica pura', sujeto: 'La etiológica pura (teórica)', menor: 'la etiológica pura', dash: '7 5', par: 'pura_vs_sintomatica' },
+    hib: { clave: 'etiologica_hibrida', nombre: 'Híbrida', corto: 'Híbrida', sujeto: 'La híbrida', menor: 'la híbrida', dash: '', par: 'hibrida_vs_sintomatica' }
+  };
+  var EXPL = {
+    sint: 'Medicación mientras haga falta, sin vacuna.',
+    pura: 'Prueba y vacuna sin medicación. Escenario teórico: supone que la vacuna controla la enfermedad por sí sola; la bibliografía indica que esto ocurre en una minoría.',
+    hib: 'Prueba y vacuna más el sintomático que cada perro siga necesitando, según la respuesta.'
+  };
+  function colorVia(r, v) { return v === 'sint' ? 'var(--c-' + r.sintomatica.farmaco + ')' : (v === 'pura' ? 'var(--c-pura)' : 'var(--c-etio)'); }
+  function viasVisibles() { return S.comparar === 'pura' ? ['sint', 'pura'] : (S.comparar === 'hibrida' ? ['sint', 'hib'] : ['sint', 'pura', 'hib']); }
+  function etioVisibles() { return viasVisibles().filter(function (v) { return v !== 'sint'; }); }
+  function totalDe(r, v) { return r[VIA[v].clave].total; }
+
   // ---------- gráfico de líneas ----------
   function pasoBonito(max, n) {
     var bruto = max / n, e = Math.pow(10, Math.floor(Math.log10(bruto))), f = bruto / e;
     return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * e;
   }
-  function geometria(r, vista, W, conEtiquetas) {
-    var k = vista === 'tutor' ? 'coste_tutor_acum' : 'margen_acum';
-    var a = [0].concat(r.sintomatica.mensual[k]), b = [0].concat(r.etiologica.mensual[k]), N = a.length - 1;
-    var H = W < 520 ? 250 : (W < 800 ? 300 : 340), mi = 58, md = conEtiquetas ? 150 : 14, ms = 18, mb = 34;
-    var maxV = Math.max.apply(null, a.concat(b).concat([1])), minV = Math.min.apply(null, a.concat(b).concat([0]));
+  function geometria(r, vista, W, conEtiquetas, vias) {
+    var k = vista === 'tutor' ? 'coste_tutor_acum' : 'margen_acum', ser = {}, todos = [1, 0];
+    vias.forEach(function (v) { ser[v] = [0].concat(r[VIA[v].clave].mensual[k]); todos = todos.concat(ser[v]); });
+    var N = ser.sint.length - 1;
+    var H = W < 520 ? 260 : (W < 800 ? 300 : 340), mi = 58, md = conEtiquetas ? 150 : 14, ms = 18, mb = 34;
+    var maxV = Math.max.apply(null, todos), minV = Math.min.apply(null, todos);
     var paso = pasoBonito(maxV - minV, 4), y1 = Math.ceil(maxV / paso) * paso, y0 = Math.floor(minV / paso) * paso;
     var x = function (m) { return mi + (W - mi - md) * m / N; }, y = function (v) { return ms + (H - ms - mb) * (1 - (v - y0) / (y1 - y0)); };
-    return { a: a, b: b, N: N, W: W, H: H, mi: mi, md: md, ms: ms, mb: mb, x: x, y: y, y0: y0, y1: y1, paso: paso };
+    return { s: ser, vias: vias, a: ser.sint, N: N, W: W, H: H, mi: mi, md: md, ms: ms, mb: mb, x: x, y: y, y0: y0, y1: y1, paso: paso };
   }
-  function svgGrafico(r, vista, W, conEtiquetas, idp) {
-    var g = geometria(r, vista, W, conEtiquetas), cS = 'var(--c-' + r.sintomatica.farmaco + ')', cE = 'var(--c-etio)', s = '';
+  function etiquetaCruce(v, cr, varias) {
+    if (!varias) return (cr.cruces_multiples ? 'Cruce definitivo: mes ' : 'Se cruzan en el mes ') + cr.mes;
+    return (v === 'pura' ? 'Pura' : 'Híbrida') + (cr.cruces_multiples ? ', definitivo: mes ' : ': mes ') + cr.mes;
+  }
+  function svgGrafico(r, vista, W, conEtiquetas, idp, vias) {
+    vias = vias || viasVisibles();
+    var g = geometria(r, vista, W, conEtiquetas, vias), s = '';
     for (var v = g.y0; v <= g.y1 + 1e-6; v += g.paso) {
       s += '<line x1="' + g.mi + '" x2="' + (W - g.md) + '" y1="' + g.y(v) + '" y2="' + g.y(v) + '" stroke="var(--line' + (Math.abs(v) < 1e-9 ? '-2' : '') + ')" stroke-width="1"/>' +
         '<text x="' + (g.mi - 8) + '" y="' + (g.y(v) + 4) + '" text-anchor="end">' + eur(v) + '</text>';
@@ -3419,45 +3581,61 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       s += '<line x1="' + g.x(m) + '" x2="' + g.x(m) + '" y1="' + (g.H - g.mb) + '" y2="' + (g.H - g.mb + 5) + '" stroke="var(--line-2)"/>';
       if (i % saltar === 0) s += '<text x="' + g.x(m) + '" y="' + (g.H - g.mb + 19) + '" text-anchor="middle">' + (hA === 1 ? 'mes ' + m : (i === 1 ? '1 año' : i + ' años')) + '</text>';
     }
-    var camino = function (arr) { return arr.map(function (v, m) { return (m ? 'L' : 'M') + g.x(m).toFixed(1) + ' ' + g.y(v).toFixed(1); }).join(''); };
-    s += '<path d="' + camino(g.a) + '" fill="none" stroke="' + cS + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="' + camino(g.b) + '" fill="none" stroke="' + cE + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
-    var yS = g.y(g.a[g.N]), yE = g.y(g.b[g.N]), xf = g.x(g.N);
-    s += '<circle cx="' + xf + '" cy="' + yS + '" r="5" fill="' + cS + '" stroke="var(--surface)" stroke-width="2"/><circle cx="' + xf + '" cy="' + yE + '" r="5" fill="' + cE + '" stroke="var(--surface)" stroke-width="2"/>';
+    var camino = function (arr) { return arr.map(function (val, mm) { return (mm ? 'L' : 'M') + g.x(mm).toFixed(1) + ' ' + g.y(val).toFixed(1); }).join(''); };
+    vias.forEach(function (vv) {
+      s += '<path d="' + camino(g.s[vv]) + '" fill="none" stroke="' + colorVia(r, vv) + '" stroke-width="' + (vv === 'pura' ? 2.2 : 2) + '"' + (VIA[vv].dash ? ' stroke-dasharray="' + VIA[vv].dash + '"' : '') + ' stroke-linejoin="round" stroke-linecap="round"/>';
+    });
+    var xf = g.x(g.N);
+    vias.forEach(function (vv) { s += '<circle cx="' + xf + '" cy="' + g.y(g.s[vv][g.N]) + '" r="5" fill="' + colorVia(r, vv) + '" stroke="var(--surface)" stroke-width="2"/>'; });
     if (conEtiquetas) {
-      var lS = yS, lE = yE;
-      if (Math.abs(yS - yE) < 34) { var mid = (yS + yE) / 2, arriba = yS <= yE; lS = mid + (arriba ? -17 : 17); lE = mid + (arriba ? 17 : -17); }
-      var et = function (yy, yo, nombre, valor) { return (Math.abs(yy - yo) > 3 ? '<line x1="' + (xf + 6) + '" y1="' + yo + '" x2="' + (xf + 13) + '" y2="' + yy + '" stroke="var(--line-2)"/>' : '') +
-        '<text class="et-fin" x="' + (xf + 16) + '" y="' + (yy - 2) + '">' + nombre + '<tspan x="' + (xf + 16) + '" dy="15">' + eur(valor) + '</tspan></text>'; };
-      s += et(lS, yS, 'Solo sintomático', g.a[g.N]) + et(lE, yE, 'Etiológica', g.b[g.N]);
+      // etiquetas directas al final de cada línea, separadas al menos 32 px
+      var et = vias.map(function (vv) { var yy = g.y(g.s[vv][g.N]); return { v: vv, yo: yy, y: yy }; }).sort(function (p, q) { return p.yo - q.yo; });
+      var GAP = 32, top = g.ms + 6, bot = g.H - g.mb + 4;
+      for (var it = 0; it < 6; it++) {
+        for (var j = 1; j < et.length; j++) if (et[j].y - et[j - 1].y < GAP) { var mid = (et[j].y + et[j - 1].y) / 2; et[j - 1].y = mid - GAP / 2; et[j].y = mid + GAP / 2; }
+        if (et[0].y < top) { var dd = top - et[0].y; et.forEach(function (e2) { e2.y += dd; }); }
+        if (et[et.length - 1].y > bot) { var du = et[et.length - 1].y - bot; et.forEach(function (e2) { e2.y -= du; }); }
+      }
+      et.forEach(function (e2) {
+        s += (Math.abs(e2.y - e2.yo) > 3 ? '<line x1="' + (xf + 6) + '" y1="' + e2.yo + '" x2="' + (xf + 13) + '" y2="' + e2.y + '" stroke="var(--line-2)"/>' : '') +
+          '<text class="et-fin" x="' + (xf + 16) + '" y="' + (e2.y - 2) + '">' + VIA[e2.v].corto + '<tspan x="' + (xf + 16) + '" dy="15">' + eur(g.s[e2.v][g.N]) + '</tspan></text>';
+      });
     }
-    var cr = r.cruce[vista === 'tutor' ? 'tutor' : 'clinica'];
-    if (cr) {
-      var xc = g.x(cr.mes), yc = g.y((g.a[cr.mes] + g.b[cr.mes]) / 2), tx = lim(xc, g.mi + 70, W - g.md - 70), arribaLibre = yc - 34 > g.ms;
-      s += '<line x1="' + xc + '" x2="' + xc + '" y1="' + (arribaLibre ? yc - 22 : yc + 22) + '" y2="' + yc + '" stroke="var(--ink)" stroke-width="1"/>' +
-        '<circle cx="' + xc + '" cy="' + yc + '" r="5.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>' +
-        '<text class="et-cruce" x="' + tx + '" y="' + (arribaLibre ? yc - 28 : yc + 38) + '" text-anchor="middle">' + (cr.cruces_multiples ? 'Cruce definitivo: mes ' : 'Se cruzan en el mes ') + cr.mes + '</text>';
+    var via = vista === 'tutor' ? 'tutor' : 'clinica', ev = vias.filter(function (vv) { return vv !== 'sint'; }), n = 0;
+    ev.forEach(function (vv) {
+      var cr = r.comparaciones[VIA[vv].par].cruce[via];
+      if (!cr) return;
+      var b = g.s[vv], xc = g.x(cr.mes), yc = g.y((g.a[cr.mes] + b[cr.mes]) / 2), tx = lim(xc, g.mi + 80, W - g.md - 80);
+      var arriba = n % 2 === 0 ? yc - 34 > g.ms : !(yc + 44 < g.H - g.mb);
+      s += '<line x1="' + xc + '" x2="' + xc + '" y1="' + (arriba ? yc - 22 : yc + 22) + '" y2="' + yc + '" stroke="var(--ink)" stroke-width="1"/>' +
+        '<circle cx="' + xc + '" cy="' + yc + '" r="5.5" fill="var(--surface)" stroke="' + colorVia(r, vv) + '" stroke-width="2.5"/>' +
+        '<text class="et-cruce" x="' + tx + '" y="' + (arriba ? yc - 28 : yc + 38) + '" text-anchor="middle">' + etiquetaCruce(vv, cr, ev.length > 1) + '</text>';
+      n++;
+    });
+    if (idp) {
+      s += '<g id="' + idp + '-cursor" visibility="hidden"><line id="' + idp + '-l" y1="' + g.ms + '" y2="' + (g.H - g.mb) + '" stroke="var(--ink-3)" stroke-width="1"/>' +
+        vias.map(function (vv) { return '<circle id="' + idp + '-c-' + vv + '" r="5" fill="' + colorVia(r, vv) + '" stroke="var(--surface)" stroke-width="2"/>'; }).join('') + '</g>' +
+        '<rect id="' + idp + '-zona" x="' + g.mi + '" y="0" width="' + (W - g.mi - g.md) + '" height="' + g.H + '" fill="transparent"/>';
     }
-    if (idp) s += '<g id="' + idp + '-cursor" visibility="hidden"><line id="' + idp + '-l" y1="' + g.ms + '" y2="' + (g.H - g.mb) + '" stroke="var(--ink-3)" stroke-width="1"/>' +
-      '<circle id="' + idp + '-ca" r="5" fill="' + cS + '" stroke="var(--surface)" stroke-width="2"/><circle id="' + idp + '-cb" r="5" fill="' + cE + '" stroke="var(--surface)" stroke-width="2"/></g>' +
-      '<rect id="' + idp + '-zona" x="' + g.mi + '" y="0" width="' + (W - g.mi - g.md) + '" height="' + g.H + '" fill="transparent"/>';
-    return { svg: '<svg viewBox="0 0 ' + W + ' ' + g.H + '" width="' + W + '" height="' + g.H + '" role="img" aria-label="Acumulado mes a mes de las dos vías">' + s + '</svg>', g: g };
+    var nom = vias.map(function (vv) { return VIA[vv].corto.toLowerCase(); });
+    return { svg: '<svg viewBox="0 0 ' + W + ' ' + g.H + '" width="' + W + '" height="' + g.H + '" role="img" aria-label="Acumulado mes a mes: ' + nom.join(', ') + '">' + s + '</svg>', g: g };
   }
   var anchoGraf = 0;
   function renderGrafico() {
-    var cont = $('grafico'), W = Math.max(280, Math.floor(cont.clientWidth || 600)), tutor = S.vista === 'tutor';
+    var cont = $('grafico'), W = Math.max(280, Math.floor(cont.clientWidth || 600)), tutor = S.vista === 'tutor', vias = viasVisibles();
     anchoGraf = W;
-    var o = svgGrafico(R, S.vista, W, W >= 640, 'g'), g = o.g;
+    var o = svgGrafico(R, S.vista, W, W >= 640, 'g', vias), g = o.g;
     cont.innerHTML = o.svg + '<div class="g-tip" id="g-tip" hidden></div>';
     var zona = $('g-zona'), tipG = $('g-tip'), cur = $('g-cursor');
     var mover = function (ev) {
       var b = cont.getBoundingClientRect(), px = (ev.clientX - b.left) * (W / b.width);
       var m = lim(Math.round((px - g.mi) / (W - g.mi - g.md) * g.N), 1, g.N), X = g.x(m);
       cur.setAttribute('visibility', 'visible'); $('g-l').setAttribute('x1', X); $('g-l').setAttribute('x2', X);
-      $('g-ca').setAttribute('cx', X); $('g-ca').setAttribute('cy', g.y(g.a[m])); $('g-cb').setAttribute('cx', X); $('g-cb').setAttribute('cy', g.y(g.b[m]));
-      var d = g.b[m] - g.a[m];
-      tipG.innerHTML = '<b>Mes ' + m + ' (año ' + Math.ceil(m / 12) + ')</b><div><i class="sw" style="background:var(--c-' + R.sintomatica.farmaco + ')"></i>Solo sintomático<em>' + eur(g.a[m]) + '</em></div>' +
-        '<div><i class="sw" style="background:var(--c-etio)"></i>Etiológica<em>' + eur(g.b[m]) + '</em></div><div>Diferencia<em>' + (d > 0.5 ? '+' : '') + eur(d) + '</em></div>';
+      vias.forEach(function (vv) { var c = $('g-c-' + vv); c.setAttribute('cx', X); c.setAttribute('cy', g.y(g.s[vv][m])); });
+      tipG.innerHTML = '<b>Mes ' + m + ' (año ' + Math.ceil(m / 12) + ')</b>' + vias.map(function (vv) {
+        var d = g.s[vv][m] - g.a[m];
+        return '<div><i class="sw" style="background:' + colorVia(R, vv) + '"></i>' + VIA[vv].corto + '<em>' + eur(g.s[vv][m]) + (vv === 'sint' ? '' : ' (' + (d > 0.5 ? '+' : '') + eur(d) + ')') + '</em></div>';
+      }).join('');
       tipG.hidden = false;
       var tw = tipG.offsetWidth, esc_ = b.width / W, left = X * esc_ + 14; if (left + tw > b.width) left = X * esc_ - tw - 14;
       tipG.style.left = Math.max(0, left) + 'px'; tipG.style.top = Math.max(0, g.ms * esc_) + 'px';
@@ -3465,81 +3643,97 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
     zona.addEventListener('pointermove', mover); zona.addEventListener('pointerdown', mover);
     zona.addEventListener('pointerleave', function () { cur.setAttribute('visibility', 'hidden'); tipG.hidden = true; });
     $('g-titulo').textContent = (tutor ? 'Lo que lleva pagado el tutor, mes a mes' : 'Margen acumulado de clínica, mes a mes');
-    $('g-leyenda').innerHTML = '<span><i style="background:var(--c-' + R.sintomatica.farmaco + ')"></i>Solo sintomático <b class="num">' + eur(g.a[g.N]) + '</b></span><span><i style="background:var(--c-etio)"></i>Etiológica <b class="num">' + eur(g.b[g.N]) + '</b></span>';
-    $('g-cruce').textContent = fraseCruce(R, tutor);
+    $('g-leyenda').innerHTML = vias.map(function (vv) {
+      return '<span><i style="background:' + colorVia(R, vv) + (vv === 'pura' ? ';background:repeating-linear-gradient(90deg,' + colorVia(R, vv) + ' 0 6px,transparent 6px 9px)' : '') + '"></i>' + VIA[vv].corto + ' <b class="num">' + eur(g.s[vv][g.N]) + '</b></span>';
+    }).join('');
+    $('g-cruce').innerHTML = frasesCruce(R, tutor, etioVisibles()).map(function (t) { return '<p>' + t + '</p>'; }).join('');
   }
-  // Texto del cruce generado del signo FINAL real de la diferencia acumulada (etiológica − sintomática).
-  function relacionFinal(signo, tutor) {
-    if (tutor) return signo < 0 ? 'la vía etiológica lleva menos gasto acumulado para el tutor' : 'la vía etiológica lleva más gasto acumulado para el tutor';
-    return signo > 0 ? 'la vía etiológica acumula más margen que la sintomática' : 'la vía etiológica acumula menos margen que la sintomática';
+  // Texto del cruce generado del signo FINAL real de la diferencia acumulada (vía etiológica − solo sintomático).
+  function relacionFinal(signo, tutor, v) {
+    var nom = VIA[v].menor;
+    if (tutor) return signo < 0 ? nom + ' lleva menos gasto acumulado para el tutor que solo sintomático' : nom + ' lleva más gasto acumulado para el tutor que solo sintomático';
+    return signo > 0 ? nom + ' acumula más margen que solo sintomático' : nom + ' acumula menos margen que solo sintomático';
   }
   function listaMeses(ms) { return ms.length === 1 ? 'el mes ' + ms[0] : 'los meses ' + ms.slice(0, -1).join(', ') + ' y ' + ms[ms.length - 1]; }
-  function fraseCruce(r, tutor) {
-    var via = tutor ? 'tutor' : 'clinica', cr = r.cruce[via], cs = r.cruce.cambios_signo ? r.cruce.cambios_signo[via] : null;
+  function fraseCruce(r, tutor, v) {
+    var via = tutor ? 'tutor' : 'clinica', c = r.comparaciones[VIA[v].par].cruce, cr = c[via], cs = c.cambios_signo[via];
     var h = anios(r.entrada.horizonte_anios), ms = cs ? cs.meses_cambio_signo : [];
     if (cr) {
-      if (cr.cruces_multiples) return 'Las curvas se cruzan varias veces por las compras de vial (' + listaMeses(cr.meses_cambio_signo) + '); desde el mes ' + cr.mes + ' (año ' + cr.anio + ') quedan definitivamente así: ' + relacionFinal(cr.signo_final, tutor) + '.';
-      return 'Las curvas se cruzan en el mes ' + cr.mes + ' (año ' + cr.anio + '): a partir de ahí y hasta el final del horizonte, ' + relacionFinal(cr.signo_final, tutor) + '.';
+      if (cr.cruces_multiples) return 'Las curvas se cruzan varias veces por las compras de vial (' + listaMeses(cr.meses_cambio_signo) + '); desde el mes ' + cr.mes + ' (año ' + cr.anio + ') quedan definitivamente así: ' + relacionFinal(cr.signo_final, tutor, v) + '.';
+      return 'Las curvas se cruzan en el mes ' + cr.mes + ' (año ' + cr.anio + '): a partir de ahí y hasta el final del horizonte, ' + relacionFinal(cr.signo_final, tutor, v) + '.';
     }
-    if (ms.length) return 'Las curvas se cruzan en ' + listaMeses(ms) + ' por las compras de vial, pero el cruce no se mantiene: al final del horizonte de ' + h + ', ' + relacionFinal(cs.signo_final, tutor) + '.';
-    return 'Las curvas no se cruzan en el horizonte de ' + h + '.';
+    if (ms.length) return 'Las curvas se cruzan en ' + listaMeses(ms) + ' por las compras de vial, pero el cruce no se mantiene: al final del horizonte de ' + h + ', ' + relacionFinal(cs.signo_final, tutor, v) + '.';
+    return 'Las curvas no se cruzan en el horizonte de ' + h + ': de principio a fin, ' + relacionFinal(cs.signo_final || cs.signo_inicial, tutor, v) + '.';
+  }
+  function frasesCruce(r, tutor, vias) {
+    return vias.map(function (v) { return '<b>Solo sintomático frente a ' + VIA[v].menor + ':</b> ' + esc(fraseCruce(r, tutor, v)); });
   }
 
   // ---------- frases generadas desde el signo real ----------
-  function fraseDiferencia(r, vista) {
-    var h = anios(r.entrada.horizonte_anios);
+  function fraseDiferencia(r, vista, v) {
+    var h = anios(r.entrada.horizonte_anios), d = r.comparaciones[VIA[v].par].diferencia;
     if (vista === 'tutor') {
-      var d = r.diferencia.coste_tutor_final;
-      if (Math.abs(d) < 0.5) return 'Las dos vías le cuestan al tutor prácticamente lo mismo en ' + h + '.';
-      return 'La vía etiológica le cuesta al tutor ' + eur(Math.abs(d)) + (d > 0 ? ' más' : ' menos') + ' en ' + h + '.';
+      var t = d.coste_tutor_final;
+      if (Math.abs(t) < 0.5) return VIA[v].sujeto + ' y solo sintomático le cuestan al tutor prácticamente lo mismo en ' + h + '.';
+      return VIA[v].sujeto + ' le cuesta al tutor ' + eur(Math.abs(t)) + (t > 0 ? ' más' : ' menos') + ' que solo sintomático en ' + h + '.';
     }
-    var m = r.diferencia.margen_final;
-    if (Math.abs(m) < 0.5) return 'Las dos vías dejan prácticamente el mismo margen en ' + h + '.';
-    return 'La vía etiológica deja ' + eur(Math.abs(m)) + (m > 0 ? ' más' : ' menos') + ' de margen en ' + h + '.';
+    var m = d.margen_final;
+    if (Math.abs(m) < 0.5) return VIA[v].sujeto + ' y solo sintomático dejan prácticamente el mismo margen en ' + h + '.';
+    return VIA[v].sujeto + ' deja ' + eur(Math.abs(m)) + (m > 0 ? ' más' : ' menos') + ' de margen que solo sintomático en ' + h + '.';
   }
-  function fraseOtra(r, vista) {
-    return vista === 'tutor' ? fraseDiferencia(r, 'clinica').replace('La vía etiológica deja', 'Para la clínica, deja').replace('Las dos vías dejan', 'Para la clínica, las dos dejan')
-      : fraseDiferencia(r, 'tutor').replace('La vía etiológica le cuesta al tutor', 'Al tutor le cuesta').replace('Las dos vías le cuestan al tutor', 'Al tutor las dos le cuestan');
-  }
+  function frasesDiferencia(r, vista, vias) { return vias.map(function (v) { return fraseDiferencia(r, vista, v); }).join(' '); }
   var NOMBRE_RAMA = { retira: 'Retiran el sintomático', reduce: 'Lo reducen', no_responde: 'No responden', abandona: 'Abandonan' };
+
+  function detVia(r, v) {
+    var s = r.sintomatica, e = r.etiologica_hibrida, rv = r.entrada.revisiones;
+    var revTxt = function (n) { return n === 1 ? '1 revisión al año' : n + ' revisiones al año'; };
+    var pre = (e.test ? esc(e.test.nombre) + ', ' : 'Sin test, ') + esc(e.inmunoterapia.nombre);
+    if (v === 'sint') return esc(s.nombre) + ' y ' + revTxt(rv.sintomatica_por_anio) + '.';
+    if (v === 'pura') return pre + ' y revisiones de la vacuna. Sin medicación.';
+    return pre + ' y ' + esc(s.nombre) + ' mientras haga falta.';
+  }
 
   function renderResultados() {
     var r;
     try { r = M.compararVias(datos, escenario()); } catch (e) { r = { disponible: false, motivo: 'No se ha podido calcular: ' + e.message }; }
     R = r;
-    var clin = S.vista === 'clinica', h = anios(S.horizonte);
-    $('res-entrada').textContent = 'Perro de ' + num(S.peso, dec1(S.peso)) + ' kg a ' + h + '. ' + (clin ? 'Se destaca el margen de la clínica.' : 'Se destaca lo que paga el tutor.') + ' Incluye fármaco, test, vacuna y revisiones.';
+    var clin = S.vista === 'clinica', h = anios(S.horizonte), vias = viasVisibles(), ev = etioVisibles();
+    $('res-entrada').textContent = 'Perro de ' + num(S.peso, dec1(S.peso)) + ' kg a ' + h + '. ' + (clin ? 'Se destaca el margen de la clínica.' : 'Se destaca lo que paga el tutor.') + ' Incluye fármaco, test, vacuna y revisiones según cada escenario.';
     if (!r.disponible) {
       $('res-cuerpo').hidden = true; $('res-nodisp').hidden = false;
       $('res-nodisp').innerHTML = '<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 5v5M9 12.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><div><strong>No hay comparación para este peso</strong>' + esc(r.motivo || '') + ' Elige otro sintomático de base o «El más barato para el tutor».</div>';
-      $('base-nota').textContent = ''; return;
+      $('base-nota').textContent = 'Solo cuenta en la vía sintomática y en la híbrida; en la etiológica pura no interviene.'; return;
     }
     $('res-cuerpo').hidden = false; $('res-nodisp').hidden = true;
-    var s = r.sintomatica, e = r.etiologica, k = clin ? 'margen' : 'coste_tutor';
-    $('base-nota').textContent = S.base === 'mas_barato' ? 'A este peso y horizonte es ' + s.nombre + '.' : '';
-    var revTxt = function (n) { return n === 1 ? '1 revisión al año' : n + ' revisiones al año'; };
-    var via = function (nombre, color, total, det) {
-      return '<div class="via"><p class="via-nombre"><i class="sw" style="background:' + color + '"></i>' + nombre + '</p><p class="via-cifra" title="' + eur(total[k], 2) + '">' + eur(total[k]) + '</p>' +
-        '<p class="via-det">' + det + '</p><p class="via-otra num">' + (clin ? 'El tutor paga ' + eur(total.coste_tutor) : 'Margen de clínica: ' + eur(total.margen)) + ' (' + pct(total.margen_pct) + ' de margen)</p></div>';
+    var s = r.sintomatica, e = r.etiologica_hibrida, k = clin ? 'margen' : 'coste_tutor';
+    $('base-nota').textContent = (S.base === 'mas_barato' ? 'A este peso y horizonte es ' + s.nombre + '. ' : '') + 'Solo cuenta en la vía sintomática y en la híbrida; en la etiológica pura no interviene.';
+    var tarjeta = function (v) {
+      var total = totalDe(r, v);
+      return '<div class="via" id="via-' + v + '"><p class="via-nombre"><i class="sw" style="background:' + colorVia(r, v) + '"></i>' + VIA[v].nombre + '</p>' +
+        '<p class="via-cifra" title="' + eur(total[k], 2) + '">' + eur(total[k]) + '</p>' +
+        '<p class="via-expl">' + EXPL[v] + '</p>' +
+        '<p class="via-det">' + detVia(r, v) + '</p><p class="via-otra num">' + (clin ? 'El tutor paga ' + eur(total.coste_tutor) : 'Margen de clínica: ' + eur(total.margen)) + ' (' + pct(total.margen_pct) + ' de margen)</p></div>';
     };
-    $('duelo').innerHTML = via('Solo sintomático', 'var(--c-' + s.farmaco + ')', s.total, esc(s.nombre) + ' y ' + revTxt(r.entrada.revisiones.sintomatica_por_anio) + '.') +
-      via('Vía etiológica', 'var(--c-etio)', e.total, (e.test ? esc(e.test.nombre) + ', ' : 'Sin test, ') + esc(e.inmunoterapia.nombre) + ' y ' + esc(s.nombre) + ' mientras haga falta.');
+    $('duelo').className = 'duelo n' + vias.length;
+    $('duelo').innerHTML = vias.map(tarjeta).join('');
     $('duelo').setAttribute('aria-label', (clin ? 'Margen acumulado de clínica en ' : 'Coste acumulado para el tutor en ') + h);
-    $('veredicto').textContent = fraseDiferencia(r, S.vista);
+    $('veredicto').textContent = frasesDiferencia(r, S.vista, ev);
     var c100 = r.cohorte.por_100_perros;
-    $('veredicto-sub').textContent = (clin ? 'Margen acumulado de clínica' : 'Coste acumulado para el tutor') + ' en valor esperado. ' + fraseOtra(r, S.vista) + ' De cada 100 perros que empiezan la vacuna, ' +
-      num(c100.retiran_sintomatico, dec1(c100.retiran_sintomatico)) + ' retiran el sintomático y ' + num(c100.reducen_sintomatico, dec1(c100.reducen_sintomatico)) + ' lo reducen.';
+    $('veredicto-sub').textContent = (clin ? 'Margen acumulado de clínica' : 'Coste acumulado para el tutor') + ' en valor esperado. ' + frasesDiferencia(r, clin ? 'tutor' : 'clinica', ev) +
+      (ev.indexOf('hib') >= 0 ? ' En la híbrida, de cada 100 perros que empiezan la vacuna, ' + num(c100.retiran_sintomatico, dec1(c100.retiran_sintomatico)) + ' retiran el sintomático y ' + num(c100.reducen_sintomatico, dec1(c100.reducen_sintomatico)) + ' lo reducen.' : '') +
+      (ev.indexOf('pura') >= 0 ? ' La etiológica pura no está respaldada como resultado típico: sirve de cota, no de previsión.' : '');
     $('avisos-calc').innerHTML = (r.avisos || []).filter(function (a) { return ['TEST_ALIMENTARIO_SIN_BENEFICIO', 'ALTERNATIVA_NOTA_AL_PIE', 'CONCENTRACION_DEDUCIDA'].indexOf(a.codigo) < 0; }).map(function (a) { return '<p>Aviso del cálculo: ' + esc(a.texto) + '</p>'; }).join('');
 
     renderGrafico();
 
-    // cohorte
+    // cohorte (solo la híbrida)
+    $('bloque-cohorte').hidden = ev.indexOf('hib') < 0;
     var ramas = M.RAMAS, desc = [];
     $('cohorte-barra').innerHTML = ramas.map(function (id) {
       var p = e.ramas[id].probabilidad_12_meses * 100; desc.push(NOMBRE_RAMA[id] + ': ' + num(p, 1));
       return p > 0.01 ? '<div style="flex:0 1 ' + p.toFixed(3) + '%;background:var(--k-' + id + ');color:var(--k-' + id + '-ink)" data-tip="' + esc('<b>' + NOMBRE_RAMA[id] + '</b><br>' + num(p, 1) + ' de cada 100 a los 12 meses') + '">' + (p >= 9 ? num(p, dec1(p)) : '') + '</div>' : '';
     }).join('');
-    $('cohorte-barra').setAttribute('aria-label', 'De 100 perros a los 12 meses. ' + desc.join('; '));
+    $('cohorte-barra').setAttribute('aria-label', 'Vía híbrida, de 100 perros a los 12 meses. ' + desc.join('; '));
     $('ramas').innerHTML = ramas.map(function (id) {
       var ra = e.ramas[id], p12 = ra.probabilidad_12_meses * 100, pf = ra.probabilidad_final * 100;
       var v = clin ? ra.por_paciente.margen_total : ra.por_paciente.coste_tutor_total, d = v - s.total[k];
@@ -3551,32 +3745,44 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
         '<p class="eco num">' + (clin ? 'Cada uno deja <b>' + eur(v) + '</b> de margen' : 'Cada uno paga <b>' + eur(v) + '</b>') + ' en ' + h + ': ' + cmp + '.</p></dd></div>';
     }).join('');
 
-    // tabla anual
-    var f = function (x) { return eur(x, 2); };
-    $('tabla-anual-cont').innerHTML = '<table><thead><tr class="t-agr"><th></th><th colspan="2">Solo sintomático</th><th colspan="2">Vía etiológica</th><th colspan="2">Diferencia acumulada</th></tr>' +
-      '<tr><th>Año</th><th>Paga el tutor</th><th>Margen</th><th>Paga el tutor</th><th>Margen</th><th>Tutor</th><th>Margen</th></tr></thead><tbody>' +
-      s.anual.map(function (a, i) { var b = e.anual[i], dt = b.coste_tutor_acum - a.coste_tutor_acum, dm = b.margen_acum - a.margen_acum;
-        return '<tr><td>' + a.anio + '</td><td>' + f(a.coste_tutor) + '</td><td>' + f(a.margen) + '</td><td>' + f(b.coste_tutor) + '</td><td>' + f(b.margen) + '</td><td>' + (dt > 0 ? '+' : '') + f(dt) + '</td><td>' + (dm > 0 ? '+' : '') + f(dm) + '</td></tr>'; }).join('') +
-      '</tbody><tfoot><tr><td>Total</td><td>' + f(s.total.coste_tutor) + '</td><td>' + f(s.total.margen) + '</td><td>' + f(e.total.coste_tutor) + '</td><td>' + f(e.total.margen) + '</td><td>' +
-      (r.diferencia.coste_tutor_final > 0 ? '+' : '') + f(r.diferencia.coste_tutor_final) + '</td><td>' + (r.diferencia.margen_final > 0 ? '+' : '') + f(r.diferencia.margen_final) + '</td></tr></tfoot></table>';
+    // tabla anual: columnas de las vías visibles y diferencias acumuladas frente a solo sintomático
+    var f = function (x) { return eur(x, 2); }, sg = function (x) { return (x > 0.005 ? '+' : '') + f(x); };
+    var cab1 = '<th></th>' + vias.map(function (v) { return '<th colspan="2">' + VIA[v].nombre + '</th>'; }).join('') + ev.map(function (v) { return '<th colspan="2">' + VIA[v].corto + ' − sintomático (acum.)</th>'; }).join('');
+    var cab2 = '<th>Año</th>' + vias.map(function () { return '<th>Paga el tutor</th><th>Margen</th>'; }).join('') + ev.map(function () { return '<th>Tutor</th><th>Margen</th>'; }).join('');
+    $('tabla-anual-cont').innerHTML = '<table><thead><tr class="t-agr">' + cab1 + '</tr><tr>' + cab2 + '</tr></thead><tbody>' +
+      s.anual.map(function (a, i) {
+        return '<tr><td>' + a.anio + '</td>' + vias.map(function (v) { var b = r[VIA[v].clave].anual[i]; return '<td>' + f(b.coste_tutor) + '</td><td>' + f(b.margen) + '</td>'; }).join('') +
+          ev.map(function (v) { var b = r[VIA[v].clave].anual[i]; return '<td>' + sg(b.coste_tutor_acum - a.coste_tutor_acum) + '</td><td>' + sg(b.margen_acum - a.margen_acum) + '</td>'; }).join('') + '</tr>';
+      }).join('') + '</tbody><tfoot><tr><td>Total</td>' + vias.map(function (v) { var t = totalDe(r, v); return '<td>' + f(t.coste_tutor) + '</td><td>' + f(t.margen) + '</td>'; }).join('') +
+      ev.map(function (v) { var d = r.comparaciones[VIA[v].par].diferencia; return '<td>' + sg(d.coste_tutor_final) + '</td><td>' + sg(d.margen_final) + '</td>'; }).join('') + '</tr></tfoot></table>';
   }
 
   function renderCartera() {
     var c;
     try { c = M.calcularCartera(datos, { n_pacientes: S.cartera.n, peso_medio_kg: S.cartera.peso, escenario: escenario(true) }); } catch (e) { c = null; }
     if (!c || !c.n_incluidos) { $('cartera-res').innerHTML = ''; $('cartera-nota').textContent = 'No hay cálculo de cartera: el sintomático de base no está autorizado a ese peso medio.'; return; }
-    var d = c.diferencia_margen_medio_anual, base = c.grupos[0] ? datos.farmacos[c.grupos[0].farmaco] : null;
-    $('cartera-res').innerHTML = '<div><div class="rot"><i class="sw" style="background:var(--c-' + (c.grupos[0] ? c.grupos[0].farmaco : 'apoquel') + ')"></i>Toda la cartera solo sintomática</div><div class="cifra" title="' + eur(c.sintomatica.margen_medio_anual, 2) + '">' + eur(c.sintomatica.margen_medio_anual) + '</div><div class="menor">de margen al año</div></div>' +
-      '<div><div class="rot"><i class="sw" style="background:var(--c-etio)"></i>Toda la cartera por la vía etiológica</div><div class="cifra" title="' + eur(c.etiologica.margen_medio_anual, 2) + '">' + eur(c.etiologica.margen_medio_anual) + '</div><div class="menor">de margen al año</div></div>';
-    $('cartera-nota').textContent = (Math.abs(d) < 0.5 ? 'Las dos vías dejan prácticamente el mismo margen anual.' : 'Con ' + num(c.n_incluidos) + ' pacientes, la vía etiológica deja ' + eur(Math.abs(d)) + (d > 0 ? ' más' : ' menos') + ' de margen al año.') +
+    var base = c.grupos[0] ? datos.farmacos[c.grupos[0].farmaco] : null, vias = viasVisibles();
+    var color = { sint: 'var(--c-' + (c.grupos[0] ? c.grupos[0].farmaco : 'apoquel') + ')', pura: 'var(--c-pura)', hib: 'var(--c-etio)' };
+    var rot = { sint: 'Toda la cartera solo sintomática', pura: 'Toda la cartera, etiológica pura (teórico)', hib: 'Toda la cartera, vía híbrida' };
+    $('cartera-res').className = 'cartera-res' + (vias.length === 3 ? ' n3' : '');
+    $('cartera-res').innerHTML = vias.map(function (v) {
+      var x = c[VIA[v].clave];
+      return '<div id="cart-' + v + '"><div class="rot"><i class="sw" style="background:' + color[v] + '"></i>' + rot[v] + '</div><div class="cifra" title="' + eur(x.margen_medio_anual, 2) + '">' + eur(x.margen_medio_anual) + '</div><div class="menor">de margen al año</div></div>';
+    }).join('');
+    var fr = etioVisibles().map(function (v) {
+      var d = c.diferencias_margen_medio_anual[v === 'pura' ? 'pura_vs_sintomatica' : 'hibrida_vs_sintomatica'];
+      return Math.abs(d) < 0.5 ? VIA[v].sujeto + ' y solo sintomático dejan prácticamente el mismo margen anual.' : VIA[v].sujeto + ' deja ' + eur(Math.abs(d)) + (d > 0 ? ' más' : ' menos') + ' de margen al año que solo sintomático.';
+    });
+    $('cartera-nota').textContent = 'Con ' + num(c.n_incluidos) + ' pacientes: ' + fr.join(' ').replace(/^La /, 'la ') +
       ' Media anual de los ' + anios(c.horizonte_anios).replace('1 año', 'primer año') + (base ? ', con ' + base.nombre + ' de base' : '') + '. Aproximación lineal con un único peso medio: la dosis real va por tramos de peso.';
   }
 
   // ---------- informe ----------
+  var SALVEDAD_PURA = 'La etiológica pura es un escenario teórico: supone que la vacuna controla la enfermedad sin medicación, algo que la bibliografía solo describe en una minoría; no está respaldada como resultado típico.';
   function renderInforme() {
     var hoja = $('hoja');
     if (!R || !R.disponible) { hoja.innerHTML = '<p>No hay comparación para este peso con el sintomático elegido.</p>'; return; }
-    var r = R, s = r.sintomatica, e = r.etiologica, a = r.entrada.asit, h = anios(S.horizonte), hoy = '';
+    var r = R, s = r.sintomatica, e = r.etiologica_hibrida, a = r.entrada.asit, h = anios(S.horizonte), hoy = '', vias = viasVisibles(), ev = etioVisibles();
     try { hoy = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }); } catch (err) { hoy = ''; }
     var filasF = datos.orden_farmacos.map(function (id) {
       var x = RK.filas[id];
@@ -3592,25 +3798,32 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       ['Revisiones con vacuna (año 1 / siguientes)', r.entrada.revisiones.etiologica_primer_anio + ' / ' + r.entrada.revisiones.etiologica_siguientes, false], ['Cytopoint', 'cada ' + S.cyto + ' semanas (' + CYTO_ETQ + ')', true]
     ];
     var t = datos.tests.filter(function (x) { return x.id === S.test; })[0];
-    hoja.innerHTML = '<div><h3>Paciente alérgico: comparación de vías</h3><div class="datos"><span>Peso <b>' + num(S.peso, dec1(S.peso)) + ' kg</b></span><span>Horizonte <b>' + h + '</b></span><span>Meses con síntomas <b>' + S.meses + ' de 12</b></span>' + (hoy ? '<span>Fecha <b>' + hoy + '</b></span>' : '') + '</div></div>' +
+    var comp = (e.test ? esc(e.test.nombre) + ' + ' : '') + esc(e.inmunoterapia.nombre);
+    var filaVia = { sint: 'Solo sintomático: ' + esc(s.nombre), pura: 'Solo etiológica (teórico): ' + comp + ', sin medicación', hib: 'Híbrida: ' + comp + ' + ' + esc(s.nombre) + ' según la respuesta' };
+    hoja.innerHTML = '<div><h3>Paciente alérgico: comparación de escenarios</h3><div class="datos"><span>Peso <b>' + num(S.peso, dec1(S.peso)) + ' kg</b></span><span>Horizonte <b>' + h + '</b></span><span>Meses con síntomas <b>' + S.meses + ' de 12</b></span>' + (hoy ? '<span>Fecha <b>' + hoy + '</b></span>' : '') + '</div></div>' +
       '<div><h4>Sintomáticos: pauta y economía anual (' + (S.anioRk === 1 ? 'primer año' : 'año de mantenimiento') + ', sin revisiones)</h4><div class="tabla-scroll"><table><thead><tr><th>Fármaco</th><th style="text-align:left">Pauta</th><th>Paga el tutor</th><th>Margen</th><th>Margen %</th></tr></thead><tbody>' + filasF + '</tbody></table></div></div>' +
-      '<div><h4>Comparación a ' + h + '</h4><div class="tabla-scroll"><table><thead><tr><th>Vía</th><th>Paga el tutor</th><th>Margen de clínica</th><th>Margen %</th></tr></thead><tbody>' +
-      '<tr><td>Solo sintomático: ' + esc(s.nombre) + '</td><td class="nw">' + eur(s.total.coste_tutor, 2) + '</td><td class="nw">' + eur(s.total.margen, 2) + '</td><td class="nw">' + pct(s.total.margen_pct) + '</td></tr>' +
-      '<tr><td>Etiológica: ' + (e.test ? esc(e.test.nombre) + ' + ' : '') + esc(e.inmunoterapia.nombre) + ' + ' + esc(s.nombre) + '</td><td class="nw">' + eur(e.total.coste_tutor, 2) + '</td><td class="nw">' + eur(e.total.margen, 2) + '</td><td class="nw">' + pct(e.total.margen_pct) + '</td></tr></tbody></table></div>' +
-      '<p class="frase" style="margin-top:12px">' + fraseDiferencia(r, 'clinica') + ' ' + fraseDiferencia(r, 'tutor') + '</p></div>' +
-      '<figure><h4>' + (S.vista === 'tutor' ? 'Lo que lleva pagado el tutor, mes a mes' : 'Margen acumulado de clínica, mes a mes') + '</h4><div class="grafico">' + svgGrafico(r, S.vista, 760, true, null).svg + '</div>' +
-      '<p class="menor">' + esc(fraseCruce(r, S.vista === 'tutor')) + '</p></figure>' +
-      '<div><h4>Cohorte por 100 perros que empiezan la vacuna (a los 12 meses)</h4><p style="font-size:13px">' + M.RAMAS.map(function (id) { var q = e.ramas[id].probabilidad_12_meses * 100; return NOMBRE_RAMA[id] + ': ' + num(q, dec1(q)); }).join('. ') + '.</p></div>' +
-      '<div><h4>Supuestos usados</h4><ul class="sup-lista">' + sup.map(function (x) { return '<li><span>' + x[0] + (x[2] ? ' <span class="chip asuncion">asunción</span>' : '') + '</span><b>' + x[1] + '</b></li>'; }).join('') + '</ul></div>' +
-      '<p class="pie-hoja">' + (t && t.alimentario ? esc(D0.asit.advertencia_test_alimentario) + ' ' : '') + 'Medias de una cohorte en valor esperado: no predicen la respuesta de un paciente concreto. No incluye brotes, infecciones secundarias ni analíticas. El margen depende de los precios de compra de cada clínica. Las tablas de Apoquel masticable y Numelvi proceden de fichas del Reino Unido y Suiza y deben cotejarse con el prospecto español. Los valores por defecto proceden de fichas técnicas y bibliografía publicada.</p>';
+      '<div><h4>Comparación a ' + h + '</h4><div class="tabla-scroll"><table><thead><tr><th>Escenario</th><th>Paga el tutor</th><th>Margen de clínica</th><th>Margen %</th></tr></thead><tbody>' +
+      vias.map(function (v) { var x = totalDe(r, v); return '<tr id="inf-' + v + '"><td><i class="sw" style="background:' + colorVia(r, v) + ';margin-right:6px"></i>' + filaVia[v] + '</td><td class="nw">' + eur(x.coste_tutor, 2) + '</td><td class="nw">' + eur(x.margen, 2) + '</td><td class="nw">' + pct(x.margen_pct) + '</td></tr>'; }).join('') +
+      '</tbody></table></div>' +
+      '<p class="frase" style="margin-top:12px">' + frasesDiferencia(r, 'clinica', ev) + ' ' + frasesDiferencia(r, 'tutor', ev) + '</p>' +
+      (ev.indexOf('pura') >= 0 ? '<p class="menor" style="margin-top:6px">' + SALVEDAD_PURA + '</p>' : '') + '</div>' +
+      '<figure><h4>' + (S.vista === 'tutor' ? 'Lo que lleva pagado el tutor, mes a mes' : 'Margen acumulado de clínica, mes a mes') + '</h4><div class="grafico">' + svgGrafico(r, S.vista, 760, true, null, vias).svg + '</div>' +
+      frasesCruce(r, S.vista === 'tutor', ev).map(function (x) { return '<p class="menor">' + x + '</p>'; }).join('') + '</figure>' +
+      (ev.indexOf('hib') >= 0 ? '<div><h4>Vía híbrida: cohorte por 100 perros que empiezan la vacuna (a los 12 meses)</h4><p style="font-size:13px">' + M.RAMAS.map(function (id) { var q = e.ramas[id].probabilidad_12_meses * 100; return NOMBRE_RAMA[id] + ': ' + num(q, dec1(q)); }).join('. ') + '.</p></div>' : '') +
+      '<div><h4>Supuestos usados</h4><ul class="sup-lista">' + sup.map(function (x) { return '<li><span>' + x[0] + (x[2] ? ' <span class="chip asuncion">asunción</span>' : '') + '</span><b>' + x[1] + '</b></li>'; }).join('') + '</ul>' +
+      '<p class="menor" style="margin-top:8px">Los supuestos de respuesta, retirada, reducción, meses sin ahorro y abandono del primer año solo afectan a la híbrida. En la etiológica pura todos completan la pauta y solo el abandono anual posterior reduce la compra de viales.</p></div>' +
+      '<p class="pie-hoja">' + (t && t.alimentario ? esc(D0.asit.advertencia_test_alimentario) + ' ' : '') + 'Medias de una cohorte en valor esperado: no predicen la respuesta de un paciente concreto. ' + SALVEDAD_PURA + ' No incluye brotes, infecciones secundarias ni analíticas. El margen depende de los precios de compra de cada clínica. Las tablas de Apoquel masticable y Numelvi proceden de fichas del Reino Unido y Suiza y deben cotejarse con el prospecto español. Los valores por defecto proceden de fichas técnicas y bibliografía publicada.</p>';
   }
   function textoResumen() {
     if (!R || !R.disponible) return '';
-    var s = R.sintomatica, e = R.etiologica, L = [];
+    var s = R.sintomatica, e = R.etiologica_hibrida, p = R.etiologica_pura, L = [], vias = viasVisibles(), ev = etioVisibles();
+    var comp = (e.test ? e.test.nombre + ' + ' : '') + e.inmunoterapia.nombre;
     L.push('Paciente alérgico: perro de ' + num(S.peso, dec1(S.peso)) + ' kg, horizonte ' + anios(S.horizonte) + ', ' + S.meses + ' meses con síntomas al año.');
-    L.push('Solo sintomático (' + s.nombre + '): el tutor paga ' + eur(s.total.coste_tutor, 2) + '; margen de clínica ' + eur(s.total.margen, 2) + '.');
-    L.push('Vía etiológica (' + (e.test ? e.test.nombre + ' + ' : '') + e.inmunoterapia.nombre + '): el tutor paga ' + eur(e.total.coste_tutor, 2) + '; margen de clínica ' + eur(e.total.margen, 2) + '.');
-    L.push(fraseDiferencia(R, 'clinica') + ' ' + fraseDiferencia(R, 'tutor'));
+    if (vias.indexOf('sint') >= 0) L.push('Solo sintomático (' + s.nombre + '): el tutor paga ' + eur(s.total.coste_tutor, 2) + '; margen de clínica ' + eur(s.total.margen, 2) + '.');
+    if (vias.indexOf('pura') >= 0) L.push('Solo etiológica, escenario teórico (' + comp + ', sin medicación): el tutor paga ' + eur(p.total.coste_tutor, 2) + '; margen de clínica ' + eur(p.total.margen, 2) + '.');
+    if (vias.indexOf('hib') >= 0) L.push('Híbrida (' + comp + ' + ' + s.nombre + ' según la respuesta): el tutor paga ' + eur(e.total.coste_tutor, 2) + '; margen de clínica ' + eur(e.total.margen, 2) + '.');
+    L.push(frasesDiferencia(R, 'clinica', ev) + ' ' + frasesDiferencia(R, 'tutor', ev));
+    if (ev.indexOf('pura') >= 0) L.push(SALVEDAD_PURA);
     L.push('Medias de cohorte en valor esperado; no predicen a un paciente concreto. El margen depende de los precios de compra de cada clínica.');
     return L.join('\n');
   }
@@ -3653,8 +3866,8 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
 
     var t = datos.tests.filter(function (x) { return x.id === S.test; })[0], subl = viaDe(S.vacuna) === 'sublingual';
     $('t-causa-tit').textContent = t ? 'Tratar la causa: prueba de alergia y vacuna' : 'Tratar la causa: vacuna de la alergia';
-    $('t-causa-txt').textContent = (t ? 'Con un análisis de sangre se comprueba a qué es alérgico su perro, por ejemplo a ácaros o a pólenes, y con el resultado se prepara una vacuna a su medida.' : 'Se prepara una vacuna a la medida de su perro, con aquello a lo que es alérgico.') +
-      (subl ? ' Se da en gotas por la boca.' : ' Se pone con inyecciones periódicas.') + ' Tarda varios meses en notarse, y al principio se sigue con la medicación de siempre.' +
+    $('t-causa-txt').textContent = (t ? 'Un análisis de sangre muestra a qué es alérgico su perro (ácaros, pólenes…) y con el resultado se prepara una vacuna a su medida.' : 'Se prepara una vacuna a la medida de su perro, con aquello a lo que es alérgico.') +
+      (subl ? ' Se da en gotas por la boca' : ' Se pone con inyecciones periódicas') + ', tarda meses en notarse y lo normal es seguir con la medicación mientras haga falta.' +
       (t && t.alimentario ? ' Este análisis no sirve para saber si tiene alergia a algún alimento: eso se comprueba con una dieta especial.' : '');
     var ok = !!(R && R.disponible);
     $('t-cmp').hidden = !ok; $('t-nodisp').hidden = ok; $('t-esperar').hidden = !ok;
@@ -3664,33 +3877,43 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       $('t-pie').textContent = 'Hoja orientativa para comentar con su veterinario. Precios orientativos con IVA. Solo el medicamento: no incluye visitas, análisis de control, la administración de las inyecciones, brotes ni infecciones.';
       return;
     }
-    var s = R.sintomatica, e = R.etiologica, Fb = datos.farmacos[s.farmaco], base = Fb.marcas ? 'ciclosporina' : Fb.nombre;
-    var conRot = t ? 'Con prueba y vacuna' : 'Con vacuna';
-    $('t-duelo').innerHTML = '<div class="t-via" id="t-solo"><p class="t-via-rot">Solo medicación <span>(' + esc(base) + ')</span></p><p class="t-via-cifra">' + eur(s.total.coste_tutor) + '</p><p class="t-via-pie">en ' + h + '</p></div>' +
-      '<div class="t-via" id="t-con"><p class="t-via-rot">' + conRot + '</p><p class="t-via-cifra">' + eur(e.total.coste_tutor) + '</p><p class="t-via-pie">en ' + h + ', de media</p></div>';
+    var s = R.sintomatica, e = R.etiologica_hibrida, p = R.etiologica_pura, Fb = datos.farmacos[s.farmaco], base = Fb.marcas ? 'ciclosporina' : Fb.nombre;
+    var pv = t ? 'Prueba y vacuna' : 'Vacuna';
+    var caja = function (id, color, rot, total, pie, nota, hab) {
+      return '<div class="t-via" id="' + id + '"><p class="t-via-rot"><i class="sw" style="background:' + color + '"></i>' + rot + '</p><p class="t-via-cifra">' + eur(total) + '</p><p class="t-via-pie">' + pie + '</p>' +
+        (nota ? '<p class="t-via-nota' + (hab ? ' hab' : '') + '">' + nota + '</p>' : '') + '</div>';
+    };
+    $('t-duelo').innerHTML = caja('t-solo', 'var(--c-' + s.farmaco + ')', 'Solo medicación <span>(' + esc(base) + ')</span>', s.total.coste_tutor, 'en ' + h, '', false) +
+      caja('t-pura', 'var(--c-pura)', pv + ', sin medicación', p.total.coste_tutor, 'en ' + h, 'Solo si el perro responde muy bien; no se puede asegurar de antemano.', false) +
+      caja('t-con', 'var(--c-etio)', pv + ', más medicación mientras haga falta', e.total.coste_tutor, 'en ' + h + ', de media', '<b>Lo más habitual.</b>', true);
+    var mixta = (t ? 'Con prueba y vacuna' : 'Con vacuna') + ', más la medicación que haga falta,';
     var d = R.diferencia.coste_tutor_final, cr = R.cruce.tutor, v;
-    if (Math.abs(d) < 0.5) v = 'En ' + h + ' cuesta prácticamente lo mismo.';
-    else v = 'En ' + h + ' cuesta unos ' + eur(Math.abs(d)) + (d > 0 ? ' más.' : ' menos.');
+    if (Math.abs(d) < 0.5) v = mixta + ' en ' + h + ' cuesta prácticamente lo mismo que solo medicación.';
+    else v = mixta + ' en ' + h + ' cuesta unos ' + eur(Math.abs(d)) + (d > 0 ? ' más' : ' menos') + ' que solo medicación.';
     if (cr && cr.signo_final < 0) v += ' Empieza a compensar a partir del año ' + cr.anio + '.';
     else if (cr && cr.signo_final > 0) v += ' Desde el año ' + cr.anio + ' sale más cara.';
     else if (d > 0.5) v += ' En este plazo no llega a compensar el gasto del principio.';
     $('t-veredicto').textContent = v;
+    var dp = R.comparaciones.pura_vs_sintomatica.diferencia.coste_tutor_final;
+    var frPura = 'Si pudiera dejar la medicación, serían unos ' + eur(p.total.coste_tutor) +
+      (Math.abs(dp) < 0.5 ? ', prácticamente lo mismo que solo medicación' : ', ' + eur(Math.abs(dp)) + (dp > 0 ? ' más' : ' menos') + ' que solo medicación') + '; esto le pasa a pocos perros y no se sabe de antemano.';
     var d1 = e.anual[0].coste_tutor - s.anual[0].coste_tutor;
-    $('t-primer').textContent = S.horizonte === 1 ? '' : (Math.abs(d1) < 0.5 ? 'El primer año cuesta prácticamente lo mismo.' :
-      'El primer año cuesta unos ' + eur(Math.abs(d1)) + (d1 > 0 ? ' más, porque se paga ' + (t ? 'la prueba y ' : '') + 'la vacuna y se mantiene la medicación.' : ' menos.'));
-    $('t-primer').hidden = S.horizonte === 1;
-    $('t-media').textContent = 'La cifra con vacuna es la media de todos los perros que la empiezan, les funcione o no.';
+    var frPrimer = S.horizonte === 1 ? '' : (Math.abs(d1) < 0.5 ? 'El primer año cuesta prácticamente lo mismo. ' :
+      'El primer año cuesta unos ' + eur(Math.abs(d1)) + (d1 > 0 ? ' más, porque se paga ' + (t ? 'la prueba y ' : '') + 'la vacuna y se mantiene la medicación. ' : ' menos. '));
+    $('t-primer').textContent = frPrimer + frPura;
+    $('t-primer').hidden = false;
+    $('t-media').textContent = ''; $('t-media').hidden = true;
 
     var red = R.entrada.asit.reduccion_parcial, fr = {
       retira: 'dejan la medicación', reduce: Math.abs(red - 0.5) < 0.005 ? 'la reducen a la mitad' : 'la reducen en torno a un ' + pct(red, 0),
       no_responde: 'no mejoran lo suficiente', abandona: 'la dejan antes del año' };
-    $('t-barra').innerHTML = M.RAMAS.map(function (id) { var p = e.ramas[id].probabilidad_12_meses * 100; return p > 0.01 ? '<i style="flex:0 1 ' + p.toFixed(3) + '%;background:var(--k-' + id + ')"></i>' : ''; }).join('');
+    $('t-barra').innerHTML = M.RAMAS.map(function (id) { var q = e.ramas[id].probabilidad_12_meses * 100; return q > 0.01 ? '<i style="flex:0 1 ' + q.toFixed(3) + '%;background:var(--k-' + id + ')"></i>' : ''; }).join('');
     $('t-diez').innerHTML = M.RAMAS.map(function (id) {
       var n = de10(e.ramas[id].probabilidad_12_meses);
       return '<li id="t10-' + id + '"><b' + (/^\d/.test(n) ? '' : ' class="txt"') + '><i style="background:var(--k-' + id + ')"></i>' + n + '</b><span>' + fr[id] + '</span></li>';
     }).join('');
     $('t-pie').textContent = 'Hoja orientativa para comentar con su veterinario. Precios orientativos con IVA. El coste al mes de cada opción es solo el del medicamento; la comparación suma además ' + incl +
-      '. No incluye visitas adicionales, análisis de control, la administración de las inyecciones, brotes ni infecciones.';
+      '. La cifra con vacuna y medicación es la media de todos los perros que la empiezan, les funcione o no; la opción sin medicación es un caso ideal, no una previsión. No incluye visitas adicionales, análisis de control, la administración de las inyecciones, brotes ni infecciones.';
   }
 
   var pendiente = false;
@@ -3723,6 +3946,7 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
       pedir();
     });
     $('supuestos').addEventListener('input', function (e) { var k = e.target.getAttribute && e.target.getAttribute('data-sup'); if (k) { S.asit[k] = +e.target.value; pedir(); } });
+    $('comparar').addEventListener('click', function (e) { var b = e.target.closest('button[data-cmp]'); if (b) { S.comparar = b.getAttribute('data-cmp'); pedir(); } });
     $('supuestos').addEventListener('click', function (e) { var b = e.target.closest('button[data-pleno]'); if (b) { S.pleno = b.getAttribute('data-pleno'); pedir(); } });
     $('sup-reset').addEventListener('click', function () { S.asit = asitDefecto(viaDe(S.vacuna)); S.pleno = 'rampa'; pedir(); });
     [['rev-sint', 'sint'], ['rev-et1', 'et1'], ['rev-etn', 'etn']].forEach(function (p) {
@@ -3797,7 +4021,32 @@ if (typeof window !== 'undefined') window.CALC_MOTOR = CALC_MOTOR;
   }
   var opcionesPendientes = false;
 
-  cargar(); construir(); opcionesDinamicas(); eventos(); render();
+  // ---------- modo día / noche ----------
+  // Sin elección guardada sigue al sistema (o al data-theme que imponga el host); al pulsar, manda la elección del usuario.
+  var CLAVE_TEMA = 'calculadora-paciente-alergico.tema';
+  var mqOscuro = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function temaActual() { var t = document.documentElement.getAttribute('data-theme'); return t === 'light' || t === 'dark' ? t : (mqOscuro && mqOscuro.matches ? 'dark' : 'light'); }
+  function pintarTema() {
+    var noche = temaActual() === 'dark', b = $('tema'), txt = noche ? 'Modo noche' : 'Modo día';
+    b.setAttribute('aria-pressed', String(noche)); b.setAttribute('aria-label', txt); b.title = noche ? 'Cambiar a modo día' : 'Cambiar a modo noche';
+    $('tema-txt').textContent = txt;
+  }
+  function iniciarTema() {
+    var guardado = null;
+    try { guardado = window.localStorage.getItem(CLAVE_TEMA); } catch (err) { guardado = null; }
+    if (guardado === 'light' || guardado === 'dark') document.documentElement.setAttribute('data-theme', guardado);
+    $('tema').addEventListener('click', function () {
+      var nuevo = temaActual() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nuevo);
+      try { window.localStorage.setItem(CLAVE_TEMA, nuevo); } catch (err) { /* sin almacenamiento: vale para esta sesión */ }
+      pintarTema();
+    });
+    if (mqOscuro) { if (mqOscuro.addEventListener) mqOscuro.addEventListener('change', pintarTema); else if (mqOscuro.addListener) mqOscuro.addListener(pintarTema); }
+    if (typeof MutationObserver === 'function') new MutationObserver(pintarTema).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    pintarTema();
+  }
+
+  cargar(); construir(); opcionesDinamicas(); eventos(); iniciarTema(); render();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (R && R.disponible) renderGrafico(); });
   window.__CPA = { estado: function () { return S; }, resultado: function () { return R; }, datos: function () { return datos; } };
 })();
